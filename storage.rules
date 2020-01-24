@@ -1,0 +1,36 @@
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /user {
+      match /avatars/iam/{allPaths=**} {
+        allow write: if request.resource.size < 10 * 1024 * 1024 && request.resource.contentType.matches('image/.*') && request.auth.token['user'];
+        allow read: if request.auth.token['user'];
+      }
+
+      match /avatars/profile/{userId}/{allPaths=**} {
+        allow write: if request.resource.size < 10 * 1024 * 1024 && request.resource.contentType.matches('image/.*') && request.auth.uid == userId;
+        allow read: if request.auth.uid == userId;
+      }
+    }
+
+    match /subscription {
+      match /photo/{allPaths=**} {
+        allow write: if request.resource.size < 1000000 && request.resource.contentType.matches('image/.*') && request.auth.token['subscription'];
+        allow read: if request.auth.token['subscription'];
+      }
+    }
+
+    match /order {
+      match /attachments/{allPaths=**} {
+        allow write: if request.resource.size < 1000000 && request.auth.token['order'];
+        allow read: if request.auth.token['order'];
+      }
+    }
+
+    match /inspiration {
+      match /photo/{allPaths=**} {
+        allow write: if request.resource.size < 3000000 && request.resource.contentType.matches('image/.*') && request.auth.token['inspiration'];
+        allow read: if request.auth.token['inspiration'];
+      }
+    }
+  }
+}

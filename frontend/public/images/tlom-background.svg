@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1" x2="0" y2="0.981" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#9fd4ff" stop-opacity="0.941"/>
+      <stop offset="1" stop-color="#007ee5" stop-opacity="0.941"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" y1="0.273" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#7bc0fb"/>
+      <stop offset="1" stop-color="#1a90ed"/>
+    </linearGradient>
+    <filter id="Ellipse_1" x="440" y="18" width="1060" height="1060" filterUnits="userSpaceOnUse">
+      <feOffset dx="10" dy="8" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feFlood flood-opacity="0.255"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="tLoM" x="471" y="297.974" width="998" height="501" filterUnits="userSpaceOnUse">
+      <feOffset dx="10" dy="8" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="6" result="blur-2"/>
+      <feFlood flood-opacity="0.431"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-Web_1920_1">
+      <rect width="1920" height="1080"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_1" data-name="Web 1920 – 1" clip-path="url(#clip-Web_1920_1)">
+    <rect width="1920" height="1080" fill="url(#linear-gradient)"/>
+    <g id="Group_1" data-name="Group 1" transform="translate(454 136)" style="mix-blend-mode: luminosity;isolation: isolate">
+      <g transform="matrix(1, 0, 0, 1, -454, -136)" filter="url(#Ellipse_1)">
+        <g id="Ellipse_1-2" data-name="Ellipse 1" transform="translate(448 28)" stroke="#3271bd" stroke-width="1" fill="url(#linear-gradient-2)">
+          <circle cx="512" cy="512" r="512" stroke="none"/>
+          <circle cx="512" cy="512" r="511.5" fill="none"/>
+        </g>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, -454, -136)" filter="url(#tLoM)" style="mix-blend-mode: luminosity;isolation: isolate">
+        <text id="tLoM-2" data-name="tLoM" transform="translate(960 687.97)" fill="#43a1ed" stroke="#1194f7" stroke-width="1" font-size="400" font-family="ArialRoundedMTBold, Arial Rounded MT Bold" opacity="0.633"><tspan x="-479.004" y="0">tLoM</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
