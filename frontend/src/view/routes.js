@@ -238,7 +238,7 @@ const privateRoutes = [
   {
     path: '/mylom',
     loader: () => import('view/mylom/list/MylomListPage'),
-    permissionRequired: permissions.mylomtRead,
+    permissionRequired: permissions.mylomRead,
     exact: true,
     icon: 'fas fa-project-diagram',
     label: i18n('entities.mylom.menu'),

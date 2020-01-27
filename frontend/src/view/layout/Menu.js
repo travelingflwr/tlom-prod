@@ -31,7 +31,7 @@ class Menu extends Component {
   }
 
   toggleMenuOnResize = () => {
-    window.innerWidth < 576
+    window.innerWidth < 300
       ? this.hideMenu()
       : this.showMenu();
   };
@@ -80,8 +80,8 @@ class Menu extends Component {
       <MenuWrapper
         style={{
           display: this.props.menuVisible
-            ? 'block'
-            : 'none',
+            ? 'none'
+            : 'block',
         }}
       >
         <div className="menu-nav border-right">

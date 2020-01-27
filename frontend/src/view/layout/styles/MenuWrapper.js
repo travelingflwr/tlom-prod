@@ -7,6 +7,7 @@ const MenuWrapper = styled.div`
     min-width: 200px;
     width: 250px;
     height: 100%;
+    
   }
 
   .menu-logo {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import './MylomTestApp.css';
 import firebase from 'firebase';
+import table from 'bootstrap';
 import { connect } from 'react-redux';
 import ContentWrapper from 'view/layout/styles/ContentWrapper';
 import PageTitle from 'view/shared/styles/PageTitle';
@@ -15,17 +16,25 @@ import authSelectors from 'modules/auth/authSelectors';
 import MylomTestListTable from 'view/mylomtest/list/MylomTestListTable';
 
 
-
-
 var db = firebase.firestore();
 
 // import db from './createStore'
 
-const mylomRef = db.collection("mylomtest");
+
 
 const currentUser = firebase.auth().currentUser.uid;
+const currentUserEmail = firebase.auth().currentUser.email;
+const mylomRef = db.collection("mylomtest");
+const mylomGroupRef = db.collection("mylomgrouptest");
+const mylomListRef = db.collection("mylomlisttest");
+const mylomTaskRef = db.collection("mylomtasktest");
+const mylomOwnerRef = db.collection("mylomtest").where("mylomOwner", "==", currentUser);
+
+// const mylomOwnerTest = mylomRef
 
 console.log(currentUser);
+console.log(currentUserEmail);
+console.log(mylomOwnerRef);
 
 
 var randy = db.collection('user');
@@ -145,11 +154,33 @@ class MylomTestApp extends Component {
     const ref = mylomRef.doc()
     ref.set({
       mylomName: this.state.mylom,
-      // description: this.state.mylom,
+      // description: this.state.mylom.description,
       createdAt:(new Date()).getTime(),
       completed: false,
       mylomOwner: currentUser,
-      id: ref.id
+      mylomOwnerEmail: currentUserEmail,
+      id: ref.id 
+    })
+    .then(function(docRef) {
+      console.log(docRef)
+    })
+    .catch(function(error) {
+      console.error("Error adding document: ", error);
+    });
+  }
+
+  addMylomGroup = (e) => {
+    e.preventDefault()
+
+    const ref = mylomGroupRef.doc()
+    ref.set({
+      groupName: this.state.mylomGroup,
+      // description: this.state.mylom.description,
+      createdAt:(new Date()).getTime(),
+      completed: false,
+      mylomOwner: currentUser,
+      mylomOwnerEmail: currentUserEmail,
+      id: ref.id 
     })
     .then(function(docRef) {
       console.log(docRef)
@@ -177,9 +208,11 @@ class MylomTestApp extends Component {
   }
 
   componentWillMount () {
-    mylomRef.orderBy('createdAt').onSnapshot((docSnapShot) => {
+    mylomRef.where("mylomOwner", "==", firebase.auth().currentUser.uid).orderBy('createdAt').onSnapshot((docSnapShot) => {
       let myloms = []
-      docSnapShot.forEach(doc => {myloms.push(doc.data())})
+      docSnapShot.forEach(doc => {
+        console.log(doc.mylomOwnerRef, '=>', doc.data());
+        myloms.push(doc.data())})
       this.setState({
         myloms,
         loaded: true
@@ -190,10 +223,15 @@ class MylomTestApp extends Component {
   renderMylomList () {
     const ListItem = this.state.myloms.map((mylom, index) => {
       return (
+        
         <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
-          {mylom.mylomName}
-          <button value={mylom.id} className="btn btn-sm btn-danger" onClick={this.deleteMylom}>X</button>
+          
+          <h5 class="mb-1">{mylom.mylomName}</h5>
+          <small>{mylom.mylomOwner}</small>
+          <span class="badge badge-warning badge-pill">14</span>
+          <button value={mylom.id} className="btn btn-sm btn-warning" onClick={this.deleteMylom}>X</button>
         </li>
+        
       )
     })
 
@@ -204,106 +242,74 @@ class MylomTestApp extends Component {
     )
   }
 
+  renderMylomTable () {
+    const ListItem = this.state.myloms.map((mylom, index) => {
+      return (
+
+       
+        
+        <tr class="bg-white" key={index}>
+          <th scope="row">{mylom.mylomName}</th>
+          <td><span class="badge badge-warning badge-pill">14</span></td>
+          <td>{mylom.completed.value}</td>
+          <td>
+            <button value={mylom.id} className="btn btn-sm btn-warning" onClick={this.deleteMylom}>Delete</button>{" "}
+            <button value={mylom.id} className="btn btn-sm btn-warning disabled" onClick={this.deleteMylom}>Edit</button>{" "}
+            <button value={mylom.id} className="btn btn-sm btn-warning disabled" onClick={this.deleteMylom}>View</button>
+          </td>
+        </tr>
+        
+      )
+    })
+
+    return (
+      <table class="table table-sm table-responsive-md table-light">
+
+        <thead class="bg-primary table-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Sub Items</th>
+            <th scope="col">Completed?</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {ListItem}
+        </tbody>
+      </table>
+    )
+  }
+
   render() {
     console.log(this.state)
     return (
       
-      <div className="MylomTestApp">
-
-<div className="bg-white p-4">
-                  <h3>Amy's Lists of Minimums (LoM's)</h3>
-                  
-                  <form onSubmit={this.addMylom}>
-                    <div className="input-group">
-                      <input type="text" onChange={this.handleChange} name="mylom" />
-                      <button className="btn btn-primary" type="submit" onClick={this.addMylom}>Add Mylom</button>
-                    </div>
-                  </form>
-                  
-                    {this.renderMylomList()}
-              
-                </div>
+      <div className="MylomTestAppNew">
         
-        <React.Fragment>
-        
-        <ContentWrapper>
-
-          <div className="jumbotron" style={{ backgroundImage: `url(${cloudbg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <PageTitle>
-              <center>{i18n('entities.mylomuser.list.title')}</center>
-            </PageTitle>
-
-            <Logo>
-              <h3>My tool for navigating major life changes</h3>
-              <br />
-            </Logo>
-
-            <SocialButtons>
-              <a href="https://facebook.com/listofminimums" target="_blank" rel="noopener noreferrer" >
-                <i
-                  className="fab fa-facebook"
-                  type="facebook"
-                  style={{
-                    color: '#3B5998',
-                  }}
-                />
-              </a>
-
-              <a href="https://twitter.com/listofminimums" target="_blank" rel="noopener noreferrer" >
-                <i
-                  className="fab fa-twitter"
-                  type="facebook"
-                  style={{
-                    color: '#1DA1F2',
-                  }}
-                />
-              </a>
-
-              <a href="https://instagram.com/listofminimums" target="_blank" rel="noopener noreferrer" >
-                <i
-                  className="fab fa-instagram"
-                  type="instagram"
-                  style={{
-                    color: '#e95950',
-                  }}
-                />
-              </a>
-              
-            </SocialButtons>
-            <br />
-
-            <div className="row no-gutters">
-              <div
-                style={{
-                  paddingLeft: '6px',
-                  paddingRight: '6px',
-                  paddingBottom: '12px',
-                }}
-                className="col-xs-12 col-sm-12 "
-              >
-                <div className="bg-white p-4">
-                  <h3>Amy's Lists of Minimums (LoM's)</h3>
-                  
-                  <form onSubmit={this.addMylom}>
-                    <div className="input-group">
-                      <input type="text" onChange={this.handleChange} name="mylom" />
-                      <button className="btn btn-primary" type="submit" onClick={this.addMylom}><b>Add Mylom</b></button>
-                    </div>
-                  </form>
-                  
-                    {this.renderMylomList()}
-              
-                </div>
-              </div>
+        {this.renderMylomTable()}
+        <br />
+        <div className="row no-gutters">
+        <form onSubmit={this.addMylom}>
+          <div className="input-group">
+          <div class="form-group row">
+            <label for="mylomName"><b>Mylom Name</b></label>
+            <div class="col-lg-50">
+              <input type="text" class="form-control" onChange={this.handleChange} id="mylomName" name="mylom" />
             </div>
           </div>
           
+          </div>
+          
+          <center><button className="btn btn-warning btn-lg" type="submit" onClick={this.addMylom}><b>Add Mylom</b></button></center>
+          
+          
+        </form>
+        </div>
         
-        
-        
-        </ContentWrapper>
-        </React.Fragment>
       </div>
+
+      
+      
     );
   }
 }

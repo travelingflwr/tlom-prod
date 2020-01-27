@@ -21,6 +21,13 @@
   .App-intro {
     font-size: large;
   }
+
+  .input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 50%;
   
   @keyframes App-logo-spin {
     from { transform: rotate(0deg); }

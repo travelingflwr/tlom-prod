@@ -291,7 +291,7 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
+          
         ],
         allowedStorageFolders: ['mylom'],
       },
@@ -300,7 +300,7 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
+          
         ],
         allowedStorageFolders: ['mylom'],
       },
@@ -309,7 +309,7 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
+          
         ],
         allowedStorageFolders: ['mylom'],
       },
@@ -318,7 +318,7 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
+          
         ],
       },
       mylomAutocomplete: {
@@ -326,7 +326,7 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
+          
           roles.entityEditor,
           roles.mylomEditor,
           roles.mylomViewer,
@@ -340,7 +340,7 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
+          
         ],
       },
       hiveCreate: {
@@ -348,7 +348,7 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
+          
         ],
         allowedStorageFolders: ['hive'],
       },
@@ -357,7 +357,7 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
+          
         ],
         allowedStorageFolders: ['hive'],
       },
@@ -366,7 +366,7 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
+          
         ],
         allowedStorageFolders: ['hive'],
       },
@@ -375,7 +375,7 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
+          
         ],
       },
       hiveAutocomplete: {
@@ -383,7 +383,7 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
+          
           roles.viewer,
           roles.entityEditor,
           roles.hiveEditor,
@@ -475,7 +475,7 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
+          
         ],
       },
       myListCreate: {
@@ -483,7 +483,7 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
+          
           roles.editor,
           roles.entityEditor,
           roles.projectEditor,
@@ -517,7 +517,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.editor,
           roles.viewer,
           roles.entityEditor,
@@ -530,7 +529,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.editor,
           roles.viewer,
           roles.entityEditor,
@@ -548,7 +546,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.entityEditor,
           roles.listEditor,
         ],
@@ -558,7 +555,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.editor,
           roles.entityEditor,
           roles.listEditor,
@@ -570,7 +566,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.entityEditor,
           roles.listEditor,
         ],
@@ -581,7 +576,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.entityEditor,
           roles.listEditor,
         ],
@@ -592,7 +586,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.editor,
           roles.viewer,
           roles.entityEditor,
@@ -605,7 +598,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.editor,
           roles.viewer,
           roles.entityEditor,
@@ -627,7 +619,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.entityEditor,
           roles.taskEditor,
         ],
@@ -637,7 +628,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.editor,
           roles.entityEditor,
           roles.taskEditor,
@@ -649,7 +639,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.editor,
           roles.entityEditor,
           roles.taskEditor,
@@ -661,7 +650,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.entityEditor,
           roles.taskEditor,
         ],
@@ -672,7 +660,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.editor,
           roles.viewer,
           roles.entityEditor,
@@ -685,7 +672,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.editor,
           roles.viewer,
           roles.entityEditor,
@@ -744,7 +730,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.editor,
           roles.viewer,
           roles.entityEditor,
@@ -757,7 +742,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.editor,
           roles.viewer,
           roles.entityEditor,
@@ -816,7 +800,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.editor,
           roles.viewer,
           roles.entityEditor,
@@ -829,7 +812,6 @@ class Permissions {
         allowedRoles: [
           roles.owner,
           roles.admin,
-          roles.subscriber,
           roles.editor,
           roles.viewer,
           roles.entityEditor,

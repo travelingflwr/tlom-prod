@@ -12,7 +12,6 @@ import SocialButtons from 'view/landing/styles/SocialButtons';
 import { Link } from 'react-router-dom';
 import OtherActions from 'view/landing/styles/OtherActions';
 import authSelectors from 'modules/auth/authSelectors';
-import MylomTestListTable from 'view/mylomtest/list/MylomTestListTable';
 
 
 
@@ -144,11 +143,10 @@ class MylomTestApp extends Component {
 
     const ref = mylomRef.doc()
     ref.set({
-      mylomName: this.state.mylom,
-      // description: this.state.mylom,
+      topmylom: this.state.mylom,
       createdAt:(new Date()).getTime(),
-      completed: false,
-      mylomOwner: currentUser,
+      done: false,
+      user: currentUser,
       id: ref.id
     })
     .then(function(docRef) {
@@ -191,7 +189,7 @@ class MylomTestApp extends Component {
     const ListItem = this.state.myloms.map((mylom, index) => {
       return (
         <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
-          {mylom.mylomName}
+          {mylom.topmylom}
           <button value={mylom.id} className="btn btn-sm btn-danger" onClick={this.deleteMylom}>X</button>
         </li>
       )
@@ -209,20 +207,6 @@ class MylomTestApp extends Component {
     return (
       
       <div className="MylomTestApp">
-
-<div className="bg-white p-4">
-                  <h3>Amy's Lists of Minimums (LoM's)</h3>
-                  
-                  <form onSubmit={this.addMylom}>
-                    <div className="input-group">
-                      <input type="text" onChange={this.handleChange} name="mylom" />
-                      <button className="btn btn-primary" type="submit" onClick={this.addMylom}>Add Mylom</button>
-                    </div>
-                  </form>
-                  
-                    {this.renderMylomList()}
-              
-                </div>
         
         <React.Fragment>
         
@@ -279,15 +263,15 @@ class MylomTestApp extends Component {
                   paddingRight: '6px',
                   paddingBottom: '12px',
                 }}
-                className="col-xs-12 col-sm-12 "
+                className="col-xs-12 col-sm-12 col-md-6 col-lg-6 "
               >
                 <div className="bg-white p-4">
-                  <h3>Amy's Lists of Minimums (LoM's)</h3>
+                  <h3>{this.props.userFirstNameText}'s Lists of Minimums (LoM's)</h3>
                   
                   <form onSubmit={this.addMylom}>
                     <div className="input-group">
                       <input type="text" onChange={this.handleChange} name="mylom" />
-                      <button className="btn btn-primary" type="submit" onClick={this.addMylom}><b>Add Mylom</b></button>
+                      <button className="btn btn-primary" type="submit" onClick={this.addMylom}>Add Mylom</button>
                     </div>
                   </form>
                   

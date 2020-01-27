@@ -19,6 +19,8 @@ import SocialButtons from 'view/landing/styles/SocialButtons';
 import OtherActions from 'view/landing/styles/OtherActions';
 import { Link } from 'react-router-dom';
 
+import MylomTestApp from 'view/mylomtest/newapp/MylomTestAppNew';
+
 
 
 class HomePage extends PureComponent {
@@ -93,6 +95,8 @@ class HomePage extends PureComponent {
             
           </SocialButtons>
 
+          
+
           {((this.props.userRolesText[0] === "guest") || 
           (this.props.userRolesText[0] === "subscriber") || (this.props.userRolesText[0] === "customer"))  &&
 
@@ -119,10 +123,10 @@ class HomePage extends PureComponent {
                         className="col-xs-12 col-sm-12 col-md-6 col-lg-6"
                       >
                         <div className="bg-white p-2">
-                          <h2>About</h2>
-                          <center><h3>Sub-heading</h3></center>
+                          <h2>Hi {this.props.userFirstNameText}!!</h2>
+                          <center><h3>You are a {this.props.userRolesText}</h3></center>
                           <center><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua..</p></center>
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></center>
                           
                           <OtherActions>
                             <Link
@@ -143,19 +147,8 @@ class HomePage extends PureComponent {
                       className="col-xs-12 col-sm-12 col-md-6 col-lg-6"
                     >
                       <div className="bg-white p-2">
-                        <h2>About</h2>
-                        <center><h3>Sub-heading</h3></center>
-                        <center><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua..</p></center>
-                        
-                        <OtherActions>
-                          <Link
-                            className="btn btn-lg btn-warning"
-                            to="/about"
-                          >
-                            <b>Learn More</b>
-                          </Link>
-                        </OtherActions>
+                      <h2>Your Master Lists</h2>
+                      <MylomTestApp />
                       </div>
                     </div>
                 </div>
@@ -168,53 +161,44 @@ class HomePage extends PureComponent {
         </div>
 
         {((this.props.userRolesText[0] === "guest") || 
-          (this.props.userRolesText[0] === "subscriber") || (this.props.userRolesText[0] === "customer"))  &&
+          (this.props.userRolesText[0] === "customer"))  &&
 
         <div className="row no-gutters">
           <div
               style={{
-                paddingLeft: '12px',
-                paddingRight: '12px',
+                paddingLeft: '3px',
+                paddingRight: '3px',
                 paddingBottom: '24px',
+                paddingTop: '24px',
               }}
-              className="col-xs-12 col-sm-12 col-md-6 col-lg-6 "
+              className="col-xs-12 col-lg-12 col-md-6 col-lg-6 "
             >
               <div className="p-2">
-                <h2>About</h2>
-                <center><h3>Sub-heading</h3></center>
-                <center><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua..</p></center>
-                <OtherActions>
-                  <Link
-                    className="btn btn-lg btn-primary"
-                    to="/about"
-                  >
-                    <b>Learn More</b>
-                  </Link>
-                </OtherActions>
+                <center><h3>{this.props.userFirstNameText}'s Lists of Minimums (LoM's)</h3></center>
+                
               </div>
             </div>
-            <div
+        </div>
+        
+        }
+
+        {((this.props.userRolesText[0] === "owner") || 
+          (this.props.userRolesText[0] === "subscriber") || (this.props.userRolesText[0] === "admin"))  &&
+
+        <div className="row no-gutters">
+          <div
               style={{
-                paddingLeft: '12px',
-                paddingRight: '12px',
+                paddingLeft: '3px',
+                paddingRight: '3px',
                 paddingBottom: '24px',
+                paddingTop: '24px',
               }}
-              className="col-xs-12 col-sm-12 col-md-6 col-lg-6 "
+              className="col-xs-12 col-lg-12 col-md-6 col-lg-6 "
             >
               <div className="p-2">
-                <h2>About</h2>
-                <center><h3>Sub-heading</h3></center>
-                <center><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua..</p></center>
-                <OtherActions>
-                  <Link
-                    className="btn btn-lg btn-primary"
-                    to="/about"
-                  >
-                    <b>Learn More</b>
-                  </Link>
-                </OtherActions>
+                <center><h3>{this.props.userFirstNameText}'s Lists of Minimums (LoM's)</h3></center>
+                <br />
+                <MylomTestApp />
               </div>
             </div>
         </div>
