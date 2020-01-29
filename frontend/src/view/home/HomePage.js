@@ -20,6 +20,9 @@ import OtherActions from 'view/landing/styles/OtherActions';
 import { Link } from 'react-router-dom';
 
 import MylomTestApp from 'view/mylomtest/newapp/MylomTestAppNew';
+import MylomTestGroupApp from 'view/mylomtest/newapp/MylomTestAppGroups';
+import MylomTestListApp from 'view/mylomtest/newapp/MylomTestAppLists';
+import MylomTestAppWidget from 'view/mylomtest/newapp/MylomTestAppNewWidget';
 
 
 
@@ -148,7 +151,7 @@ class HomePage extends PureComponent {
                     >
                       <div className="bg-white p-2">
                       <h2>Your Master Lists</h2>
-                      <MylomTestApp />
+                      
                       </div>
                     </div>
                 </div>
@@ -200,8 +203,14 @@ class HomePage extends PureComponent {
                 <br />
                 <MylomTestApp />
               </div>
+
+              
+
+              
             </div>
         </div>
+
+        
         
         }
 

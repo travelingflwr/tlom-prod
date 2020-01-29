@@ -24,7 +24,7 @@ var db = firebase.firestore();
 
 const currentUser = firebase.auth().currentUser.uid;
 const currentUserEmail = firebase.auth().currentUser.email;
-const mylomRef = db.collection("mylomtest");
+const mylomRef = db.collection("mylomgrouptest");
 const mylomGroupRef = db.collection("mylomgrouptest");
 const mylomListRef = db.collection("mylomlisttest");
 const mylomTaskRef = db.collection("mylomtasktest");
@@ -153,33 +153,12 @@ class MylomTestGroupApp extends Component {
 
     const ref = mylomRef.doc()
     ref.set({
-      mylomName: this.state.mylom,
+      groupName: this.state.mylom,
       // description: this.state.mylom.description,
       createdAt:(new Date()).getTime(),
       completed: false,
-      mylomOwner: currentUser,
-      mylomOwnerEmail: currentUserEmail,
-      id: ref.id 
-    })
-    .then(function(docRef) {
-      console.log(docRef)
-    })
-    .catch(function(error) {
-      console.error("Error adding document: ", error);
-    });
-  }
-
-  addMylomGroup = (e) => {
-    e.preventDefault()
-
-    const ref = mylomGroupRef.doc()
-    ref.set({
-      groupName: this.state.mylomGroup,
-      // description: this.state.mylom.description,
-      createdAt:(new Date()).getTime(),
-      completed: false,
-      mylomOwner: currentUser,
-      mylomOwnerEmail: currentUserEmail,
+      groupOwner: currentUser,
+      groupOwnerEmail: currentUserEmail,
       id: ref.id 
     })
     .then(function(docRef) {
@@ -208,7 +187,7 @@ class MylomTestGroupApp extends Component {
   }
 
   componentWillMount () {
-    mylomRef.where("mylomOwner", "==", firebase.auth().currentUser.uid).orderBy('createdAt').onSnapshot((docSnapShot) => {
+    mylomRef.where("groupOwner", "==", firebase.auth().currentUser.uid).orderBy('createdAt').onSnapshot((docSnapShot) => {
       let myloms = []
       docSnapShot.forEach(doc => {
         console.log(doc.mylomOwnerRef, '=>', doc.data());
@@ -226,8 +205,8 @@ class MylomTestGroupApp extends Component {
         
         <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
           
-          <h5 class="mb-1">{mylom.mylomName}</h5>
-          <small>{mylom.mylomOwner}</small>
+          <h5 class="mb-1">{mylom.groupName}</h5>
+          <small>{mylom.groupOwner}</small>
           <span class="badge badge-warning badge-pill">14</span>
           <button value={mylom.id} className="btn btn-sm btn-warning" onClick={this.deleteMylom}>X</button>
         </li>
@@ -249,7 +228,7 @@ class MylomTestGroupApp extends Component {
        
         
         <tr class="bg-white" key={index}>
-          <th scope="row">{mylom.mylomName}</th>
+          <th scope="row">{mylom.groupName}</th>
           <td><span class="badge badge-warning badge-pill">14</span></td>
           <td>{mylom.completed.value}</td>
           <td>
@@ -292,14 +271,14 @@ class MylomTestGroupApp extends Component {
         <form onSubmit={this.addMylom}>
           <div className="input-group">
           <div class="form-group row">
-            <label for="mylomName"><b>Mylom Name</b></label>
+            <label for="mylomName"><b>Group Name</b></label>
             <div class="col-sm-10">
               <input type="text" class="form-control" onChange={this.handleChange} id="mylomName" name="mylom" />
             </div>
           </div>
           
           </div>
-          <button className="btn btn-warning btn-lg" type="submit" onClick={this.addMylom}>Add Mylom</button>
+          <button className="btn btn-warning btn-lg" type="submit" onClick={this.addMylom}>Add Group</button>
           
         </form>
         </div>
@@ -321,4 +300,4 @@ const select = (state) => ({
   ),
 });
 
-export default MylomTestApp;
+export default MylomTestGroupApp;

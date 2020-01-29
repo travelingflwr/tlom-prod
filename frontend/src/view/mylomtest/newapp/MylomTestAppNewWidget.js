@@ -20,12 +20,6 @@ var db = firebase.firestore();
 
 // import db from './createStore'
 
-const ideas = [
-  {"title": "First idea", "premises": ["Premise one", "Premise two"], "conclusion": "Example conclusion"},
-  {"title": "Second idea", "premises": ["Premise one", "Premise two"], "conclusion": "Example conclusion"},
-  {"title": "Third idea", "premises": ["Premise one", "Premise two"], "conclusion": "Example conclusion"}
-]
-
 
 
 const currentUser = firebase.auth().currentUser.uid;
@@ -160,35 +154,13 @@ class MylomTestApp extends Component {
     const ref = mylomRef.doc()
     ref.set({
       mylomName: this.state.mylom,
-      description: "",
+      description: "Some text",
       createdAt:(new Date()).getTime(),
       completed: false,
+      mylomOwner: currentUser,
+      mylomOwnerEmail: currentUserEmail,
       groupsArray: [{groupName: "Group 1", listArray: [{listName: "List 1", taskArray: [{taskName: "Task 1"}]}]}],
-      mylomOwner: currentUser,
-      mylomOwnerEmail: currentUserEmail,
-      id: ref.id,
-      
-    })
-    .then(function(docRef) {
-      console.log(docRef)
-    })
-    .catch(function(error) {
-      console.error("Error adding document: ", error);
-    });
-  }
-
-  addMylomGroup = (e) => {
-    e.preventDefault()
-
-    const ref = mylomRef.doc()
-    ref.set({
-      mylomName: this.state.mylom,
-      description: "",
-      createdAt:(new Date()).getTime(),
-      completed: false,
-      mylomOwner: currentUser,
-      mylomOwnerEmail: currentUserEmail,
-      id: ref.id,
+      id: ref.id 
     })
     .then(function(docRef) {
       console.log(docRef)
@@ -236,9 +208,9 @@ class MylomTestApp extends Component {
         
         <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
           
-          <h5 className="mb-1">{mylom.mylomName}</h5>
+          <h5 class="mb-1">{mylom.mylomName}</h5>
           <small>{mylom.mylomOwner}</small>
-          <span className="badge badge-warning badge-pill">14</span>
+          <span class="badge badge-warning badge-pill">14</span>
           <button value={mylom.id} className="btn btn-sm btn-warning" onClick={this.deleteMylom}>X</button>
         </li>
         
@@ -252,65 +224,19 @@ class MylomTestApp extends Component {
     )
   }
 
-  renderGroupList () {
-
-    const data = [
-      { value: "Group 1", key: "0" },
-      { value: "Group 2", key: "1" },
-      { value: "Group 3", key: "2" },
-      { value: "Group 4", key: "3" },
-    ];
-
-    var ideas = [
-      {"title": "First idea", "premises": ["Premise one", "Premise two"], "conclusion": "Example conclusion"},
-      {"title": "Second idea", "premises": ["Premise one", "Premise two"], "conclusion": "Example conclusion"},
-      {"title": "Third idea", "premises": ["Premise one", "Premise two"], "conclusion": "Example conclusion"}
-    ]
-
-    
-    // const GroupItem = this.state.myloms.groupsArray.map((item, index) => {
-    // const GroupItem = this.state.myloms.map((item, index) => {
-    const GroupItem = data.map((item, index) => {
-
-    // const GroupItem = this.state.myloms.map(({mylom, groupsArray}, index) => {
-  
-      return (
-
-        <li className=" d-flex justify-content-between align-items-center" key={index}>
-          
-          
-        </li>
-        
-      )
-    })
-
-    return (
-      <ul className="list-group mt-2">
-        {GroupItem}
-      </ul>
-    )
-  }
-
   renderMylomTable () {
-    const TableItem = this.state.myloms.map((mylom, index) => {
+    const ListItem = this.state.myloms.map((mylom, index) => {
       return (
 
        
         
-        <tr className="bg-white" key={index}>
+        <tr class="bg-white" key={index}>
           <th scope="row">{mylom.mylomName}</th>
-          <td><span className="badge badge-warning badge-pill">14</span></td>
+          
           
           <td>
-              
-          </td>
-          
-          
-          <td>{mylom.completed}</td>
-          <td>
-            <button value={mylom.id} className="btn btn-sm btn-warning" onClick={this.deleteMylom}>Delete</button>{" "}
-            <button value={mylom.id} className="btn btn-sm btn-warning disabled" onClick={this.deleteMylom}>Edit</button>{" "}
-            <button value={mylom.id} className="btn btn-sm btn-warning disabled" onClick={this.deleteMylom}>View</button>
+            <button value={mylom.id} className="btn btn-sm btn-warning" onClick={this.deleteMylom}>X</button>{" "}
+            
           </td>
         </tr>
         
@@ -318,19 +244,18 @@ class MylomTestApp extends Component {
     })
 
     return (
-      <table className="table table-sm table-responsive-md table-light">
+      <table class="table table-sm table-responsive-md table-light">
 
-        <thead className="bg-primary table-dark">
+        <thead class="bg-primary table-dark">
           <tr>
             <th scope="col">Name</th>
-            <th scope="col">Sub Items</th>
-            <th scope="col">Groups</th>
-            <th scope="col">Completed?</th>
-            <th scope="col">Actions</th>
+            
+            
+            <th scope="col">{' '}</th>
           </tr>
         </thead>
         <tbody>
-          {TableItem}
+          {ListItem}
         </tbody>
       </table>
     )
@@ -338,13 +263,6 @@ class MylomTestApp extends Component {
 
   render() {
     console.log(this.state)
-
-    var ideas = [
-      {"title": "First idea", "premises": ["Premise one", "Premise two"], "conclusion": "Example conclusion"},
-      {"title": "Second idea", "premises": ["Premise one", "Premise two"], "conclusion": "Example conclusion"},
-      {"title": "Third idea", "premises": ["Premise one", "Premise two"], "conclusion": "Example conclusion"}
-    ]
-    
     return (
       
       <div className="MylomTestAppNew">
@@ -354,10 +272,10 @@ class MylomTestApp extends Component {
         <div className="row no-gutters">
         <form onSubmit={this.addMylom}>
           <div className="input-group">
-          <div className="form-group row">
-            <label form="mylomName"><b>Mylom Name</b></label>
-            <div className="col-lg-50">
-              <input type="text" className="form-control" onChange={this.handleChange} id="mylomName" name="mylom" />
+          <div class="form-group row">
+            <label for="mylomName"><b>Mylom Name</b></label>
+            <div class="col-lg-50">
+              <input type="text" class="form-control" onChange={this.handleChange} id="mylomName" name="mylom" />
             </div>
           </div>
           
@@ -368,8 +286,6 @@ class MylomTestApp extends Component {
           
         </form>
         </div>
-
-        
         
       </div>
 
