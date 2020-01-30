@@ -302,8 +302,11 @@ class MylomTestApp extends Component {
           <td><span className="badge badge-warning badge-pill">14</span></td>
           
           <td>
-              
+              {mylom.groupsArray.toString()}
+            
           </td>
+
+          
           
           
           <td>{mylom.completed}</td>
