@@ -224,8 +224,17 @@ class Landing extends Component {
             </div>
           </div>
         </div>
+        
+
+        
         </Content>
+        <br /> <br />  
+        
+        
+        
+            
       </LandingWrapper>
+      
     );
   }
 }

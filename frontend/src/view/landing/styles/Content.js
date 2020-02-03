@@ -16,6 +16,7 @@ const Content = styled.div`
 
   @media only screen and (max-width: 767px) {
     width: 100%;
+    height: 100%;
   }
 
   .jumbotron {
@@ -71,6 +72,12 @@ const Content = styled.div`
     line-height: 1.5;
     border-radius: .3rem;
   }
+  .btn-sm, .btn-group-sm>.btn {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+  }
   .btn-landing {
     /* color: #fff;
     font-size: 1.25rem;
@@ -86,7 +93,8 @@ const Content = styled.div`
     font-size: 18px;
     font-weight: 700;
     color: #fff;
-    background-color: #e5195f;
+    // background-color: #e5195f;
+    background-color: #1290DD;
     border: 0;
     border-radius: 35px;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
@@ -112,6 +120,8 @@ const Content = styled.div`
     border-radius: .25rem;
     transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
   } */
+
+  
 `;
 
 export default Content;

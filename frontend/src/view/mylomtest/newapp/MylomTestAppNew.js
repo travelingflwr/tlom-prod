@@ -236,10 +236,17 @@ class MylomTestApp extends Component {
         
         <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
           
-          <h5 className="mb-1">{mylom.mylomName}</h5>
-          <small>{mylom.mylomOwner}</small>
-          <span className="badge badge-warning badge-pill">14</span>
-          <button value={mylom.id} className="btn btn-sm btn-warning" onClick={this.deleteMylom}>X</button>
+          
+          <h5 className="mb-1" >{mylom.mylomName}</h5> {'  '}
+          <span className="badge badge-secondary badge-pill btn-primary btn-home">14 projects</span> {'  '}
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mr-2" role="group" aria-label="item edit group">
+              <button value={mylom.id} className="btn btn-primary btn-sm " onClick={this.deleteMylom}>Delete</button>
+              <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.editMylom}>Edit</button>
+              <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.viewMylom}>View</button>
+            </div>
+          </div>
+          
         </li>
         
       )
@@ -249,6 +256,121 @@ class MylomTestApp extends Component {
       <ul className="list-group mt-2">
         {ListItem}
       </ul>
+    )
+  }
+
+  renderMylomAccordion () {
+    
+    const ListItem = this.state.myloms.map((mylom, index) => {
+      var collapseTarget = "collapse" + mylom.id;
+      console.log(collapseTarget);
+
+      return (
+
+        
+        <div class="card-group list-group-item justify-content-between align-items-center" 
+          id="accordion" 
+          role="tablist" 
+          aria-multiselectable="false" 
+          key={index}>
+            {/* Begin card header data outer loop */}
+            
+              <div class="card-header">
+                <h4 class="card-title">
+                  
+                  <a data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} >{mylom.mylomName}</a>
+                </h4>
+                <div class="btn-toolbar d-flex justify-content-between align-items-center" role="toolbar" aria-label="Toolbar with button groups">
+                
+                  <h3>{'    '}{mylom.mylomName} Lists</h3>
+                
+                  <div class="btn-group mr-2" role="group" aria-label="item edit group">
+                  
+                    <button value={mylom.id} className="btn btn-primary btn-sm " onClick={this.deleteMylom}>Delete</button>
+                    <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.editMylom}>Edit</button>
+                    <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.viewMylom}>View</button>
+                  </div>
+                  {'    '}
+                </div>
+                <br />
+                <div id={collapseTarget} class="collapse">
+                  <ul class="list-group ">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">{mylom.mylomName} - List 1
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                      <div class="btn-group mr-2" role="group" aria-label="item edit group">
+                        <button value="button1" className="btn btn-primary btn-sm disabled" >Delete</button>
+                        <button value="button2" className="btn btn-sm btn-primary disabled" >Edit</button>
+                        <button value="button3" className="btn btn-sm btn-primary disabled" >View</button>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">{mylom.mylomName} - List 1
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                      <div class="btn-group mr-2" role="group" aria-label="item edit group">
+                        <button value="button1" className="btn btn-primary btn-sm disabled" >Delete</button>
+                        <button value="button2" className="btn btn-sm btn-primary disabled" >Edit</button>
+                        <button value="button3" className="btn btn-sm btn-primary disabled" >View</button>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">{mylom.mylomName} - List 1
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                      <div class="btn-group mr-2" role="group" aria-label="item edit group">
+                        <button value="button1" className="btn btn-primary btn-sm disabled" >Delete</button>
+                        <button value="button2" className="btn btn-sm btn-primary disabled" >Edit</button>
+                        <button value="button3" className="btn btn-sm btn-primary disabled" >View</button>
+                      </div>
+                    </div>
+                  </li>
+                  </ul>
+                </div>
+                
+              </div>
+
+          {/* End card header data outer loop */}
+        </div>
+        
+      )
+    })
+
+    return (
+      <div className="card text-center">
+        <div className="card-header" style={{  backgroundImage: `url(${cloudbg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+          <ul className="nav nav-tabs card-header-tabs justify-content-center" >
+            <li className="nav-item">
+              <a className="nav-link btn-lg" href="#landing" data-toggle="tab"><b>Landing Tab</b></a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link btn-lg" href="#interview" data-toggle="tab"><b>Interview Tab</b></a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link btn-lg" href="#profile" data-toggle="tab"><b>Profile Tab</b></a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link btn-lg active" href="#mylom" data-toggle="tab"><b>MyLoM</b></a>
+            </li>
+          </ul>
+        </div>
+        <div className="tab-content">
+          <div className="tab-pane fade show active" id="mylom">
+            <div className="card-body">
+              <h3 className="card-title">My List of Minimums (MyLoM)</h3>
+                <p className="card-text">With supporting text below as a natural lead-in to additional content. 
+                With supporting text below as a natural lead-in to additional content. 
+                With supporting text below as a natural lead-in to additional content. 
+                With supporting text below as a natural lead-in to additional content.</p>
+
+                <br />
+                  <a href="#" className="btn btn-lg btn-home"><b>Go somewhere</b></a>
+                <br />
+
+                <div class="card panel-default">
+                    {ListItem}
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -299,7 +421,7 @@ class MylomTestApp extends Component {
         
         <tr className="bg-white" key={index}>
           <th scope="row">{mylom.mylomName}</th>
-          <td><span className="badge badge-warning badge-pill">14</span></td>
+          <td><span className="badge badge-light badge-pill">14</span></td>
           
           <td>
               {mylom.groupsArray.toString()}
@@ -311,9 +433,9 @@ class MylomTestApp extends Component {
           
           <td>{mylom.completed}</td>
           <td>
-            <button value={mylom.id} className="btn btn-sm btn-warning" onClick={this.deleteMylom}>Delete</button>{" "}
-            <button value={mylom.id} className="btn btn-sm btn-warning disabled" onClick={this.deleteMylom}>Edit</button>{" "}
-            <button value={mylom.id} className="btn btn-sm btn-warning disabled" onClick={this.deleteMylom}>View</button>
+            <button value={mylom.id} className="btn btn-sm btn-primary " onClick={this.deleteMylom}>Delete</button>{" "}
+            <button value={mylom.id} className="btn btn-sm btn-primary disabled" onClick={this.deleteMylom}>Edit</button>{" "}
+            <button value={mylom.id} className="btn btn-sm btn-primary disabled" onClick={this.deleteMylom}>View</button>
           </td>
         </tr>
         
@@ -352,7 +474,7 @@ class MylomTestApp extends Component {
       
       <div className="MylomTestAppNew">
         
-        {this.renderMylomTable()}
+        {this.renderMylomAccordion()}
         <br />
         <div className="row no-gutters">
         <form onSubmit={this.addMylom}>
@@ -366,7 +488,7 @@ class MylomTestApp extends Component {
           
           </div>
           
-          <center><button className="btn btn-warning btn-lg" type="submit" onClick={this.addMylom}><b>Add Mylom</b></button></center>
+          <center><button className="btn btn-home btn-lg" type="submit" onClick={this.addMylom}><b>Add Mylom</b></button></center>
           
           
         </form>

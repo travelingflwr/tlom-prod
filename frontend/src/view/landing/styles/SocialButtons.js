@@ -4,6 +4,7 @@ const SocialButtons = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 24px;
+  margin-bottom: 24px;
 
   i {
     margin-left: 16px;

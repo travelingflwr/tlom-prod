@@ -4,6 +4,7 @@ const ViewWrapper = styled.div`
   .btn.btn-link {
     padding-left: 0;
   }
+  
 `;
 
 export default ViewWrapper;

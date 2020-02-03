@@ -124,13 +124,16 @@ class HomePage extends PureComponent {
             style={{paddingLeft: '12px', paddingRight: '12px', paddingBottom: '12px', paddingTop: '12px',}}>
               <div className="bg-white p-2 card rounded shadow">
                 <div class="card-body">
-                  <h2 class="card-title">Vital Info 1</h2>
-                    <center><h3>You are a {this.props.userRolesText}</h3></center>
-                    <p class="card-text">Some quick example text to build on the card title and 
-                    make up the bulk of the card's content.</p>
+                  <h2 class="card-title">LoM Description</h2>
+                    <center><h3>Your role is {this.props.userRolesText}</h3></center>
+                    <p class="card-text">Hi level - The LoM is a master list or collection of critical phases 
+                    of what needs to be accomplished.  Groups are akin to the master list that will hold a collection of "lists".
+                    Consider lists to be projects.</p>
+                    <p class="card-text">Within "lists", there will be tasks related to the list of project.  Tasks will 
+                    also be able to accomodate sub-tasks.  I'm still working on how to best represent the overall collection.</p>
                     <OtherActions>
                       <Link
-                        className="btn btn-lg btn-warning shadow-lg rounded"
+                        className="btn btn-lg btn-home shadow-lg "
                         to="/about"
                       >
                         <b>Learn More</b>
@@ -150,7 +153,7 @@ class HomePage extends PureComponent {
                     make up the bulk of the card's content.</p>
                     <OtherActions>
                       <Link
-                        className="btn btn-lg btn-warning shadow-lg rounded"
+                        className="btn btn-lg btn-home shadow-lg "
                         to="/about"
                       >
                         <b>Learn More</b>
@@ -178,7 +181,7 @@ class HomePage extends PureComponent {
                   <div className="p-4 col-xs-12 col-lg-12 col-md-6 col-lg-6">
                     <center><h2>This is your List of Minimums (LoM's) {this.props.userFirstNameText}</h2></center>
                     <br />
-                    <MylomTestApp />
+                    
                   </div>
                       
                 </div>
@@ -230,90 +233,204 @@ class HomePage extends PureComponent {
               }}
               className="col-xs-12 col-lg-12 col-md-6 col-lg-6 "
             >
+
+<MylomTestApp />
+
+<br /><br /><br /><br />
             
 
 
               <div className="card text-center">
-              <div className="card-header" style={{ backgroundImage: `url(${cloudbg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                <ul className="nav nav-tabs card-header-tabs justify-content-center">
+              <div className="card-header" style={{  backgroundImage: `url(${cloudbg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <ul className="nav nav-tabs card-header-tabs justify-content-center" >
                   <li className="nav-item">
-                    <a className="nav-link active btn-lg" href="#groups" data-toggle="tab"><b>Groups</b></a>
+                    <a className="nav-link active btn-lg" href="#landing" data-toggle="tab"><b>Landing Tab</b></a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link btn-lg" href="#lists" data-toggle="tab"><b>Lists</b></a>
+                    <a className="nav-link btn-lg" href="#interview" data-toggle="tab"><b>Interview Tab</b></a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link btn-lg" href="#tasks" data-toggle="tab"><b>Tasks</b></a>
+                    <a className="nav-link btn-lg" href="#profile" data-toggle="tab"><b>Profile Tab</b></a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link btn-lg" href="#mylom" data-toggle="tab"><b>MyLoM</b></a>
                   </li>
                 </ul>
               </div>
               <div className="tab-content">
-                <div className="tab-pane fade show active" id="groups">
+                
+                {/* Begin MyLoM tab content */}
+                <div className="tab-pane fade" id="mylom">
                   <div className="card-body">
-                    <h3 className="card-title">Groups</h3>
+                    <h3 className="card-title">My List of Minimums (MyLoM)</h3>
                     <p className="card-text">With supporting text below as a natural lead-in to additional content. 
                     With supporting text below as a natural lead-in to additional content. 
                     With supporting text below as a natural lead-in to additional content. 
                     With supporting text below as a natural lead-in to additional content.</p>
-                      <div className="list-group text-left">
-                        <a href="#" className="list-group-item list-group-item-action">This is Group 1 - some fillter content</a>
-                        <a href="#" className="list-group-item list-group-item-action">This is Group 2 - some fillter content</a>
-                        <a href="#" className="list-group-item list-group-item-action">This is Group 3 - some fillter content</a>
-                        <a href="#" className="list-group-item list-group-item-action">This is Group 4 - some fillter content</a>
-                        <a href="#" className="list-group-item list-group-item-action">This is Group 5 - some fillter content</a>
-                      </div>
-                      <br />
-                      <a href="#" className="btn btn-lg btn-warning rounded"><b>Go somewhere</b></a>
-                      <br />
-                    
-                  </div>
-                </div>
-                <div className="tab-pane fade" id="lists">
-                  <div className="card-body">
-                    <h3 className="card-title">Lists</h3>
-                    <p className="card-text">With supporting text below as a natural lead-in to additional content. 
-                    With supporting text below as a natural lead-in to additional content. 
-                    With supporting text below as a natural lead-in to additional content. 
-                    With supporting text below as a natural lead-in to additional content.</p>
-                    <div className="list-group text-left">
-                        <a href="#" className="list-group-item list-group-item-action">This is List 1 - some fillter content</a>
-                        <a href="#" className="list-group-item list-group-item-action">This is List 2 - some fillter content</a>
-                        <a href="#" className="list-group-item list-group-item-action">This is List 3 - some fillter content</a>
-                        <a href="#" className="list-group-item list-group-item-action">This is List 4 - some fillter content</a>
-                        <a href="#" className="list-group-item list-group-item-action">This is List 5 - some fillter content</a>
-                      </div>
-                      <br />
-                      <a href="#" className="btn btn-lg btn-warning rounded"><b>Go somewhere</b></a>
-                      <br />
-                  </div>
-                </div>
-                <div className="tab-pane fade" id="tasks">
-                  <div className="card-body">
-                    <h3 className="card-title">Tasks</h3>
-                    <p className="card-text">With supporting text below as a natural lead-in to additional content. 
-                    With supporting text below as a natural lead-in to additional content. 
-                    With supporting text below as a natural lead-in to additional content. 
-                    With supporting text below as a natural lead-in to additional content.</p>
-                    <div className="list-group text-left">
-                        <a href="#" className="list-group-item list-group-item-action">This is Task 1 - some fillter content</a>
-                        <a href="#" className="list-group-item list-group-item-action">This is Task 2 - some fillter content</a>
-                        <a href="#" className="list-group-item list-group-item-action">This is Task 3 - some fillter content</a>
-                        <a href="#" className="list-group-item list-group-item-action">This is Task 4 - some fillter content</a>
-                        <a href="#" className="list-group-item list-group-item-action">This is Task 5 - some fillter content</a>
-                      </div>
-                      <br />
-                      <a href="#" className="btn btn-lg btn-warning rounded"><b>Go somewhere</b></a>
-                      <br />
-                  </div>
-                </div>
-              </div>
-              
-            </div>
 
+                    <br />
+                      <a href="#" className="btn btn-lg btn-home"><b>Go somewhere</b></a>
+                    <br />
+
+                    
+  
+                    {/* Begin first list accordion content */}
+                    <div class="card-group list-group-item justify-content-between align-items-center" id="accordion" role="tablist" aria-multiselectable="true">
+                      <div class="card panel-default">
+                        <div class="card-header">
+                          <h4 class="card-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Group 1 (LoM 1)</a>
+                          </h4>
+                        </div>
+
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                          <ul class="list-group ">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Group 1 - List 1
+                              <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mr-2" role="group" aria-label="item edit group">
+                                  <button value="button1" className="btn btn-primary btn-sm disabled" >Delete</button>
+                                  <button value="button2" className="btn btn-sm btn-primary disabled" >Edit</button>
+                                  <button value="button3" className="btn btn-sm btn-primary disabled" >View</button>
+                                </div>
+                              </div>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Group 1 - List 2
+                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mr-2" role="group" aria-label="item edit group">
+                                  <button value="button1" className="btn btn-primary btn-sm disabled" >Delete</button>
+                                  <button value="button2" className="btn btn-sm btn-primary disabled" >Edit</button>
+                                  <button value="button3" className="btn btn-sm btn-primary disabled" >View</button>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div class="card panel-default">
+                        <div class="card-header">
+                          <h4 class="card-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Group 2 (LoM 2)</a>
+                          </h4>
+                        </div>
+
+                        <div id="collapseTwo" class="card-collapse collapse">
+                          <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Group 2 - List 1
+                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                  <div class="btn-group mr-2" role="group" aria-label="item edit group">
+                                    <button value="button1" className="btn btn-primary btn-sm disabled" >Delete</button>
+                                    <button value="button2" className="btn btn-sm btn-primary disabled" >Edit</button>
+                                    <button value="button3" className="btn btn-sm btn-primary disabled" >View</button>
+                                  </div>
+                                </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-center">Group 2 - List 2
+                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                  <div class="btn-group mr-2" role="group" aria-label="item edit group">
+                                    <button value="button1" className="btn btn-primary btn-sm disabled" >Delete</button>
+                                    <button value="button2" className="btn btn-sm btn-primary disabled" >Edit</button>
+                                    <button value="button3" className="btn btn-sm btn-primary disabled" >View</button>
+                                  </div>
+                                </div>
+                              </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="card panel-default">
+                        <div class="card-header">
+                          <h4 class="card-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Group 3 (LoM 3)</a>
+                          </h4>
+                        </div>
+
+                        <div id="collapseThree" class="panel-collapse collapse">
+                          <div class="list-group">
+                          <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Group 3 - List 1
+                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                  <div class="btn-group mr-2" role="group" aria-label="item edit group">
+                                    <button value="button1" className="btn btn-primary btn-sm disabled" >Delete</button>
+                                    <button value="button2" className="btn btn-sm btn-primary disabled" >Edit</button>
+                                    <button value="button3" className="btn btn-sm btn-primary disabled" >View</button>
+                                  </div>
+                                </div>
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-center">Group 3 - List 2
+                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                  <div class="btn-group mr-2" role="group" aria-label="item edit group">
+                                    <button value="button1" className="btn btn-primary btn-sm disabled" >Delete</button>
+                                    <button value="button2" className="btn btn-sm btn-primary disabled" >Edit</button>
+                                    <button value="button3" className="btn btn-sm btn-primary disabled" >View</button>
+                                  </div>
+                                </div>
+                              </li>
+                          </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+        
+                    <br /> <br />
+                    {/* End first list accordion content */}
+                      
+                  </div>
+                </div> {/* End MyLoM tab content */}
+
+                {/* Begin Landing tab content */}
+                <div className="tab-pane fade show active" id="landing">
+                  <div className="card-body">
+                    <h3 className="card-title">Landing Tab</h3>
+                    <p className="card-text">With supporting text below as a natural lead-in to additional content. 
+                    With supporting text below as a natural lead-in to additional content. 
+                    With supporting text below as a natural lead-in to additional content. 
+                    With supporting text below as a natural lead-in to additional content.</p>
+
+                    <br />
+                      <a href="#" className="btn btn-lg btn-home"><b>Go somewhere</b></a>
+                    <br />
+                  </div>
+                </div>
+                {/* End Landing tab content */}
+
+                {/* Begin Interview tab content */}
+                <div className="tab-pane fade " id="interview">
+                  <div className="card-body">
+                    <h3 className="card-title">Interview Tab</h3>
+                    <p className="card-text">With supporting text below as a natural lead-in to additional content. 
+                    With supporting text below as a natural lead-in to additional content. 
+                    With supporting text below as a natural lead-in to additional content. 
+                    With supporting text below as a natural lead-in to additional content.</p>
+
+                    <br />
+                      <a href="#" className="btn btn-lg btn-home"><b>Go somewhere</b></a>
+                    <br />
+                  </div>
+                </div>
+                {/* End Interview tab content */}
+
+                {/* Begin Profile tab content */}
+                <div className="tab-pane fade " id="profile">
+                  <div className="card-body">
+                    <h3 className="card-title">Profile Tab</h3>
+                    <p className="card-text">With supporting text below as a natural lead-in to additional content. 
+                    With supporting text below as a natural lead-in to additional content. 
+                    With supporting text below as a natural lead-in to additional content. 
+                    With supporting text below as a natural lead-in to additional content.</p>
+
+                    <br />
+                      <a href="#" className="btn btn-lg btn-home"><b>Go somewhere</b></a>
+                    <br />
+                  </div>
+                </div>
+                {/* End Profile tab content */}
+              </div>
+            </div>
           </div>
 
           
-
+          
           
 
 

@@ -83,8 +83,101 @@ const LayoutWrapper = styled.div`
   h3, .h3 {
     font-size: 1.5rem;
     color: #030303;
-    
+  
   }
+  .btn-lg, .btn-group-lg>.btn {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+  }
+  .btn-sm, .btn-group-sm>.btn {
+    padding: .5rem 1rem;
+    font-size: .75rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+    background-color: #1290DD;
+    color: #fff;
+    width: 70px;
+    font-weight: 700;
+    border: 0;
+    border-radius: 35px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+
+    &:hover {
+      box-shadow: 0 15px 15px rgba(0, 0, 0, 0.16);
+      transform: translate(0, -5px);
+  }
+  }
+  .btn-home {
+    /* color: #fff;
+    font-size: 1.25rem;
+    background-color: #e5195f;
+    border-color: #e5195f ; */
+    margin: 0 auto;
+    display: block;
+    width: 200px;
+    postition: relative;
+    padding: 12px 0;
+    left: 50%;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    // background-color: #e5195f;
+    background-color: #1290DD;
+    border: 0;
+    border-radius: 35px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+
+  &:hover {
+    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.16);
+    transform: translate(0, -5px);
+  }
+  .badge-tlom {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #1290DD;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
+  }
+  .badge-pill-tlom {
+    padding-right: .6em;
+    padding-left: .6em;
+    border-radius: 10rem;
+    background-color: #1290DD;
+  }
+  .badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #1290DD;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
+}
+
+#accordion 
+.glyphicon { margin-right:10px; }
+.panel-collapse>.list-group .list-group-item:first-child {border-top-right-radius: 0;border-top-left-radius: 0;}
+.panel-collapse>.list-group .list-group-item {border-width: 1px 0;}
+.panel-collapse>.list-group {margin-bottom: 0;}
+.panel-collapse .list-group-item {border-radius:0;}
+
 `;
 
 export default LayoutWrapper;
