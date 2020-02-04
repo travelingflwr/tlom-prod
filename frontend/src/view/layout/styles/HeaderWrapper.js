@@ -62,6 +62,8 @@ const HeaderWrapper = styled.div`
       color: var(--primary-color);
     }
   }
+
+  
 `;
 
 export default HeaderWrapper;

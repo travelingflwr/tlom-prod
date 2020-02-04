@@ -234,7 +234,7 @@ class MylomTestApp extends Component {
     const ListItem = this.state.myloms.map((mylom, index) => {
       return (
         
-        <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
+        <li className="list-group-item-lom d-flex justify-content-between align-items-center" key={index}>
           
           
           <h5 className="mb-1" >{mylom.mylomName}</h5> {'  '}
@@ -267,35 +267,46 @@ class MylomTestApp extends Component {
 
       return (
 
-        
-        <div class="card-group list-group-item justify-content-between align-items-center" 
+        <ContentWrapper>
+        <div class="card-group-lom list-group-item-lom justify-content-between align-items-center" 
           id="accordion" 
           role="tablist" 
           aria-multiselectable="false" 
           key={index}>
+
             {/* Begin card header data outer loop */}
             
-              <div class="card-header">
-                <h4 class="card-title">
+              <div class="card-header-lom">
+                <h6 class="card-title-lom d-flex justify-content-between">
                   
                   <a data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} >{mylom.mylomName}</a>
-                </h4>
-                <div class="btn-toolbar d-flex justify-content-between align-items-center" role="toolbar" aria-label="Toolbar with button groups">
-                
-                  <h3>{'    '}{mylom.mylomName} Lists</h3>
-                
                   <div class="btn-group mr-2" role="group" aria-label="item edit group">
                   
-                    <button value={mylom.id} className="btn btn-primary btn-sm " onClick={this.deleteMylom}>Delete</button>
+                    <button className="btn btn-primary btn-sm " data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} >Expand</button>
                     <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.editMylom}>Edit</button>
-                    <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.viewMylom}>View</button>
+                    <button value={mylom.id} className="btn btn-primary btn-sm " onClick={this.deleteMylom}>Delete</button>
                   </div>
+                  
+                </h6>
+                <p align="left"><b>Description:</b> With supporting text below as a natural lead-in to additional content.</p>
+                {/* <div class="btn-toolbar d-flex justify-content-between align-items-center" role="toolbar" aria-label="Toolbar with button groups"> */}
+                
+                  {/* <h3>{'    '}{mylom.mylomName} Lists</h3> */}
+                
+                  {/* <div class="btn-group mr-2" role="group" aria-label="item edit group"> */}
+                  
+                    {/* <button value={mylom.id} className="btn btn-primary btn-sm " onClick={this.deleteMylom}>Delete</button> */}
+                    {/* <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.editMylom}>Edit</button> */}
+                    {/* <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.viewMylom}>View</button> */}
+                  {/* </div> */}
                   {'    '}
-                </div>
+                {/* </div> */}
                 <br />
                 <div id={collapseTarget} class="collapse">
+                <p align="left"> Additional content here regarding the child list.</p>
                   <ul class="list-group ">
-                  <li class="list-group-item d-flex justify-content-between align-items-center">{mylom.mylomName} - List 1
+                  
+                  <li class="list-group-item-lom d-flex justify-content-between align-items-center">{mylom.mylomName} - List 1
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                       <div class="btn-group mr-2" role="group" aria-label="item edit group">
                         <button value="button1" className="btn btn-primary btn-sm disabled" >Delete</button>
@@ -304,7 +315,7 @@ class MylomTestApp extends Component {
                       </div>
                     </div>
                   </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center">{mylom.mylomName} - List 1
+                  <li class="list-group-item-lom d-flex justify-content-between align-items-center">{mylom.mylomName} - List 1
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                       <div class="btn-group mr-2" role="group" aria-label="item edit group">
                         <button value="button1" className="btn btn-primary btn-sm disabled" >Delete</button>
@@ -313,7 +324,7 @@ class MylomTestApp extends Component {
                       </div>
                     </div>
                   </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center">{mylom.mylomName} - List 1
+                  <li class="list-group-item-lom d-flex justify-content-between align-items-center">{mylom.mylomName} - List 1
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                       <div class="btn-group mr-2" role="group" aria-label="item edit group">
                         <button value="button1" className="btn btn-primary btn-sm disabled" >Delete</button>
@@ -329,6 +340,7 @@ class MylomTestApp extends Component {
 
           {/* End card header data outer loop */}
         </div>
+        </ContentWrapper>
         
       )
     })
@@ -338,7 +350,7 @@ class MylomTestApp extends Component {
         <div className="card-header" style={{  backgroundImage: `url(${cloudbg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
           <ul className="nav nav-tabs card-header-tabs justify-content-center" >
             <li className="nav-item">
-              <a className="nav-link btn-lg" href="#landing" data-toggle="tab"><b>Landing Tab</b></a>
+              <a className="nav-link btn-lg active" href="#landing" data-toggle="tab"><b>Landing Tab</b></a>
             </li>
             <li className="nav-item">
               <a className="nav-link btn-lg" href="#interview" data-toggle="tab"><b>Interview Tab</b></a>
@@ -347,12 +359,12 @@ class MylomTestApp extends Component {
               <a className="nav-link btn-lg" href="#profile" data-toggle="tab"><b>Profile Tab</b></a>
             </li>
             <li className="nav-item">
-              <a className="nav-link btn-lg active" href="#mylom" data-toggle="tab"><b>MyLoM</b></a>
+              <a className="nav-link btn-lg" href="#mylom" data-toggle="tab"><b>MyLoM</b></a>
             </li>
           </ul>
         </div>
         <div className="tab-content">
-          <div className="tab-pane fade show active" id="mylom">
+          <div className="tab-pane fade" id="mylom">
             <div className="card-body">
               <h3 className="card-title">My List of Minimums (MyLoM)</h3>
                 <p className="card-text">With supporting text below as a natural lead-in to additional content. 
@@ -361,14 +373,84 @@ class MylomTestApp extends Component {
                 With supporting text below as a natural lead-in to additional content.</p>
 
                 <br />
-                  <a href="#" className="btn btn-lg btn-home"><b>Go somewhere</b></a>
+
+                <form class="form-inline" onSubmit={this.addMylom}>
+                  
+                  <div className="form-group mx-sm-3 mb-2">
+                      <label form="mylomName" ><h3>New Mylom Name</h3></label>
+                      {/* <input type="text" className="form-control" onChange={this.handleChange} id="mylomName" name="mylom"  /> */}
+                  </div>
+                  <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" className="form-control" onChange={this.handleChange} placeholder="Enter or click button" id="mylomName" name="mylom"  />
+                  </div>
+                  <div class="form-group mx-sm-3 mb-2">
+                    <button className="btn btn-home btn-lg" type="submit" onClick={this.addMylom}><b>New Mylom</b></button>
+                  </div>
+                  
+                </form>
+                  
+                  
                 <br />
 
-                <div class="card panel-default">
+                
+
+                
+
+                <div class="card-lom panel-default">
                     {ListItem}
                 </div>
             </div>
           </div>
+
+          {/* Begin Landing tab content */}
+          <div className="tab-pane fade show active" id="landing">
+            <div className="card-body">
+              <h3 className="card-title">Landing Tab</h3>
+              <p className="card-text">With supporting text below as a natural lead-in to additional content. 
+              With supporting text below as a natural lead-in to additional content. 
+              With supporting text below as a natural lead-in to additional content. 
+              With supporting text below as a natural lead-in to additional content.</p>
+
+              <br />
+                <a href="#" className="btn btn-lg btn-home"><b>Go somewhere</b></a>
+              <br />
+            </div>
+          </div>
+          {/* End Landing tab content */}
+
+          {/* Begin Interview tab content */}
+          <div className="tab-pane fade " id="interview">
+            <div className="card-body">
+              <h3 className="card-title">Interview Tab</h3>
+              <p className="card-text">With supporting text below as a natural lead-in to additional content. 
+              With supporting text below as a natural lead-in to additional content. 
+              With supporting text below as a natural lead-in to additional content. 
+              With supporting text below as a natural lead-in to additional content.</p>
+
+              <br />
+                <a href="#" className="btn btn-lg btn-home"><b>Go somewhere</b></a>
+              <br />
+            </div>
+          </div>
+          {/* End Interview tab content */}
+
+          {/* Begin Profile tab content */}
+          <div className="tab-pane fade " id="profile">
+            <div className="card-body">
+              <h3 className="card-title">Profile Tab</h3>
+              <p className="card-text">With supporting text below as a natural lead-in to additional content. 
+              With supporting text below as a natural lead-in to additional content. 
+              With supporting text below as a natural lead-in to additional content. 
+              With supporting text below as a natural lead-in to additional content.</p>
+
+              <br />
+                <a href="#" className="btn btn-lg btn-home"><b>Go somewhere</b></a>
+              <br />
+            </div>
+          </div>
+          {/* End Profile tab content */}
+
+
         </div>
       </div>
     )
@@ -475,24 +557,7 @@ class MylomTestApp extends Component {
       <div className="MylomTestAppNew">
         
         {this.renderMylomAccordion()}
-        <br />
-        <div className="row no-gutters">
-        <form onSubmit={this.addMylom}>
-          <div className="input-group">
-          <div className="form-group row">
-            <label form="mylomName"><b>Mylom Name</b></label>
-            <div className="col-lg-50">
-              <input type="text" className="form-control" onChange={this.handleChange} id="mylomName" name="mylom" />
-            </div>
-          </div>
-          
-          </div>
-          
-          <center><button className="btn btn-home btn-lg" type="submit" onClick={this.addMylom}><b>Add Mylom</b></button></center>
-          
-          
-        </form>
-        </div>
+        
 
         
         
