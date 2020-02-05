@@ -10,9 +10,9 @@ import HomeHorizontalBarChart from 'view/home/HomeHorizontalBarChart';
 import HomePolarChart from 'view/home/HomePolarChart';
 import HomeLineChart from 'view/home/HomeLineChart';
 import authSelectors from 'modules/auth/authSelectors';
-import JumboBG from "./jumbo-bg-5.jpg";
-import JumboBG2 from "./hero-low-3.jpg";
-import CardBG from "./tlom-background.svg";
+// import JumboBG from "./jumbo-bg-5.jpg";
+// import JumboBG2 from "./hero-low-3.jpg";
+// import CardBG from "./tlom-background.svg";
 import cloudbg from "./tlom-new-hero.svg";
 
 import SocialButtons from 'view/landing/styles/SocialButtons';
@@ -20,9 +20,9 @@ import OtherActions from 'view/landing/styles/OtherActions';
 import { Link } from 'react-router-dom';
 
 import MylomTestApp from 'view/mylomtest/newapp/MylomTestAppNew';
-import MylomTestGroupApp from 'view/mylomtest/newapp/MylomTestAppGroups';
-import MylomTestListApp from 'view/mylomtest/newapp/MylomTestAppLists';
-import MylomTestAppWidget from 'view/mylomtest/newapp/MylomTestAppNewWidget';
+// import MylomTestGroupApp from 'view/mylomtest/newapp/MylomTestAppGroups';
+// import MylomTestListApp from 'view/mylomtest/newapp/MylomTestAppLists';
+// import MylomTestAppWidget from 'view/mylomtest/newapp/MylomTestAppNewWidget';
 
 
 

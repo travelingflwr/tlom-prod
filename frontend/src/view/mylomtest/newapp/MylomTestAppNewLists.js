@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 import OtherActions from 'view/landing/styles/OtherActions';
 import authSelectors from 'modules/auth/authSelectors';
 import MylomTestListTable from 'view/mylomtest/list/MylomTestListTable';
-import MylomTestListApp from 'view/mylomtest/newapp/MylomTestAppNewLists';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faHome, faTrash, faEdit, faPlus, faTasks, faCheckSquare, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -40,11 +39,9 @@ const currentUserEmail = firebase.auth().currentUser.email;
 const mylomRef = db.collection("mylomtest");
 const mylomGroupRef = db.collection("mylomgrouptest");
 const mylistRef = db.collection("mylisttest");
-const mytaskRef = db.collection("mytasktest");
 const mylomTaskRef = db.collection("mylomtasktest");
 const mylomOwnerRef = db.collection("mylomtest").where("mylomOwner", "==", currentUser);
 const mylistOwnerRef = db.collection("mylisttest").where("mylistOwner", "==", currentUser);
-const mytaskOwnerRef = db.collection("mytasktest").where("myTaskOwner", "==", currentUser);
 
 // const mylomOwnerTest = mylomRef
 
@@ -157,13 +154,11 @@ let uidQuery = userDbRef.where('authenticationUid', '==', currentUser).get()
 
 
 
-class MylomTestApp extends Component {
+class MylistTestApp extends Component {
   constructor () {
     super()
     this.state = {
-      myloms: [],
-      mylists: [],
-      mytasks: []
+      mylists: []
     }
   }
 
@@ -192,43 +187,18 @@ class MylomTestApp extends Component {
 
   addMylist = (e) => {
     e.preventDefault()
-
     const ref = mylistRef.doc()
     ref.set({
-      mylistName: this.state.mylist,
+      // mylistName: this.state.mylist,
+      mylistName: "",
       mylistDescription: "",
       createdAt:(new Date()).getTime(),
       completed: false,
       // groupsArray: [{groupName: "Group 1", listArray: [{listName: "List 1", taskArray: [{taskName: "Task 1"}]}]}],
       mylistOwner: currentUser,
       mylistOwnerEmail: currentUserEmail,
-      mylomId: "",
+      // mylomId: this.state.mylom,
       mylistId: ref.id,
-      
-    })
-    .then(function(docRef) {
-      console.log(docRef)
-    })
-    .catch(function(error) {
-      console.error("Error adding document: ", error);
-    });
-  }
-
-  addMytask = (e) => {
-    e.preventDefault()
-
-    const ref = mytaskRef.doc()
-    ref.set({
-      mytaskName: this.state.mytask,
-      mytaskDescription: "",
-      createdAt:(new Date()).getTime(),
-      completed: false,
-      // groupsArray: [{groupName: "Group 1", listArray: [{listName: "List 1", taskArray: [{taskName: "Task 1"}]}]}],
-      mytaskOwner: currentUser,
-      mytaskOwnerEmail: currentUserEmail,
-      myllistId: "",
-      mytaskId: ref.id,
-      parentTaskId: ref.id,
       
     })
     .then(function(docRef) {
@@ -259,14 +229,6 @@ class MylomTestApp extends Component {
     });
   }
 
-  deleteMytask = (e) => {
-    mytaskRef.doc(e.target.value).delete().then(function() {
-      console.log("Document successfully deleted!");
-    }).catch(function(error) {
-      console.error("Error removing document: ", error);
-    });
-  }
-
   handleChange = (e) => {
     const t = e.target
     this.setState({
@@ -275,16 +237,6 @@ class MylomTestApp extends Component {
   }
 
   componentWillMount () {
-    mylomRef.where("mylomOwner", "==", firebase.auth().currentUser.uid).orderBy('createdAt').onSnapshot((docSnapShot) => {
-      let myloms = []
-      docSnapShot.forEach(doc => {
-        console.log(doc.mylomOwnerRef, '=>', doc.data());
-        myloms.push(doc.data())})
-      this.setState({
-        myloms,
-        loaded: true
-      })
-    })
     mylistRef.where("mylistOwner", "==", firebase.auth().currentUser.uid).orderBy('createdAt').onSnapshot((docSnapShot) => {
       let mylists = []
       docSnapShot.forEach(doc => {
@@ -295,49 +247,10 @@ class MylomTestApp extends Component {
         loaded: true
       })
     })
-    mytaskRef.where("mytaskOwner", "==", firebase.auth().currentUser.uid).orderBy('createdAt').onSnapshot((docSnapShot) => {
-      let mytasks = []
-      docSnapShot.forEach(doc => {
-        console.log(doc.mytaskOwnerRef, '=>', doc.data());
-        mytasks.push(doc.data())})
-      this.setState({
-        mytasks,
-        loaded: true
-      })
-    })
-  }
-
-  renderMylomList () {
-    const ListItem = this.state.myloms.map((mylom, index) => {
-      return (
-        
-        <li className="list-group-item-lom d-flex justify-content-between align-items-center" key={index}>
-          
-          
-          <h5 className="mb-1" >{mylom.mylomName}</h5> {'  '}
-          <span className="badge badge-secondary badge-pill btn-primary btn-home">14 projects</span> {'  '}
-          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-            <div class="btn-group mr-2" role="group" aria-label="item edit group">
-              <button value={mylom.id} className="btn btn-primary btn-sm " onClick={this.deleteMylom}><i class="fas fa-trash"></i></button>
-              <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.editMylom}><i class="fas fa-edit"></i></button>
-              <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.viewMylom}><i class="fas fa-plus"></i></button>
-            </div>
-          </div>
-          
-        </li>
-        
-      )
-    })
-
-    return (
-      <ul className="list-group mt-2">
-        {ListItem}
-      </ul>
-    )
   }
 
   renderMylistList () {
-    const MyListItem = this.state.mylists.map((mylist, index) => {
+    const ListItem = this.state.mylists.map((mylist, index) => {
       console.log(mylist)
       return (
         
@@ -361,50 +274,23 @@ class MylomTestApp extends Component {
 
     return (
       <ul className="list-group mt-2">
-        {MyListItem}
+        {ListItem}
       </ul>
     )
   }
 
-  renderMytaskList () {
-    const MyTaskItem = this.state.mytaskss.map((mytask, index) => {
-      console.log(mytask)
-      return (
-        
-        
-        <li className="list-group-item-lom d-flex justify-content-between align-items-center" key={index}>
-          
-          
-          <h5 className="mb-1" >{mytask.mytaskName}</h5> {'  '}
-          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-            <div class="btn-group mr-2" role="group" aria-label="item edit group">
-              <button value={mytask.id} className="btn btn-primary btn-sm " onClick={this.deleteMytask}><i class="fas fa-trash"></i></button>
-              <button value={mytask.id} className="btn btn-sm btn-primary disabled " onClick={this.editMytask}><i class="fas fa-edit"></i></button>
-              <button value={mytask.id} className="btn btn-sm btn-primary disabled " onClick={this.viewMytask}><i class="fas fa-plus"></i></button>
-            </div>
-          </div>
-          
-        </li>
-        
-      )
-    })
-
-    return (
-      <ul className="list-group mt-2">
-        {MyTaskItem}
-      </ul>
-    )
-  }
-
-  renderMylomAccordion () {
+  renderMylistAccordion () {
     
-    const ListItem = this.state.myloms.map((mylom, index) => {
-      var collapseTarget = "collapse" + mylom.id;
+    const ListItem = this.state.mylists.map((mylist, index) => {
+      var collapseTarget = "collapse" + mylist.id;
       console.log(collapseTarget);
 
       return (
 
         <ContentWrapper>
+
+
+                    
         <div class="card-group-lom list-group-item-lom justify-content-between align-items-center" 
           id="accordion" 
           role="tablist" 
@@ -417,43 +303,64 @@ class MylomTestApp extends Component {
                 <h6 class="card-title-lom d-flex justify-content-between">
                 
                   
-                  <a data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-check-square"></i>{'     '}{mylom.mylomName}</a>
+                  <a data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-check-square"></i>{'     '}{mylist.mylistName}</a>
                   <div class="btn-group mr-2" role="group" aria-label="item edit group">
                   
                     <button className="btn btn-primary btn-sm " data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-plus"></i></button>
-                    <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.editMylom}><i class="fas fa-edit"></i></button>
-                    <button value={mylom.id} className="btn btn-primary btn-sm " onClick={this.deleteMylom}><i class="fas fa-trash"></i></button>
+                    <button value={mylist.id} className="btn btn-sm btn-primary disabled " onClick={this.editMylist}><i class="fas fa-edit"></i></button>
+                    <button value={mylist.id} className="btn btn-primary btn-sm " onClick={this.deleteMylist}><i class="fas fa-trash"></i></button>
                   </div>
                   
                 </h6>
                 <p align="left"><b>Description:</b> With supporting text below as a natural lead-in to additional content.</p>
-                {/* <div class="btn-toolbar d-flex justify-content-between align-items-center" role="toolbar" aria-label="Toolbar with button groups"> */}
                 
-                  {/* <h3>{'    '}{mylom.mylomName} Lists</h3> */}
-                
-                  {/* <div class="btn-group mr-2" role="group" aria-label="item edit group"> */}
-                  
-                    {/* <button value={mylom.id} className="btn btn-primary btn-sm " onClick={this.deleteMylom}>Delete</button> */}
-                    {/* <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.editMylom}>Edit</button> */}
-                    {/* <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.viewMylom}>View</button> */}
-                  {/* </div> */}
-                  {'    '}
-                {/* </div> */}
                 <br />
                 <div id={collapseTarget} class="collapse">
                 <p align="left"> Additional content here regarding the child list.</p>
 
-                  
+                  <form class="form-inline" onSubmit={this.addList}>
+                    
+                    <div className="form-group mx-sm-3 mb-2">
+                        <label form="listName" ><h3>New List Name</h3></label>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                      <input type="text" className="form-control" onChange={this.handleChange} placeholder="Enter or click button" id="listName" name="list"  />
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                      <button className="btn btn-home btn-lg" type="submit" onClick={this.addList}><b>New List</b></button>
+                    </div>
+                    
+                  </form>
 
                   <ul class="list-group ">
-
-                  {/* <MylomTestListApp /> */}
-
-                  {this.renderMylistAccordion()}
                   
-                  
-                  
-                  
+                  <li class="list-group-item-lom d-flex justify-content-between align-items-center">{mylist.mylistName} - Task 1
+                  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                      <div class="btn-group mr-1" role="group" aria-label="item edit group">
+                        <button value="button1" className="btn btn-primary btn-sm disabled" ><i class="fas fa-trash"></i></button>
+                        <button value="button2" className="btn btn-sm btn-primary disabled" ><i class="fas fa-edit"></i></button>
+                        <button value="button3" className="btn btn-sm btn-primary disabled" ><i class="fas fa-plus"></i></button>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item-lom d-flex justify-content-between align-items-center">{mylist.mylistName} - Task 2
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                      <div class="btn-group mr-2" role="group" aria-label="item edit group">
+                        <button value="button1" className="btn btn-primary btn-sm disabled" ><i class="fas fa-trash"></i></button>
+                        <button value="button2" className="btn btn-sm btn-primary disabled" ><i class="fas fa-edit"></i></button>
+                        <button value="button3" className="btn btn-sm btn-primary disabled" ><i class="fas fa-plus"></i></button>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item-lom d-flex justify-content-between align-items-center">{mylist.mylistName} - Task 3
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                      <div class="btn-group mr-2" role="group" aria-label="item edit group">
+                        <button value="button1" className="btn btn-primary btn-sm disabled" ><i class="fas fa-trash"></i></button>
+                        <button value="button2" className="btn btn-sm btn-primary disabled" ><i class="fas fa-edit"></i></button>
+                        <button value="button3" className="btn btn-sm btn-primary disabled" ><i class="fas fa-plus"></i></button>
+                      </div>
+                    </div>
+                  </li>
                   </ul>
                 </div>
                 
@@ -487,7 +394,7 @@ class MylomTestApp extends Component {
         <div className="tab-content">
           <div className="tab-pane fade" id="mylom">
             <div className="card-body">
-              <h3 className="card-title"><i class="fas fa-tasks"></i>{'     '}Your List of Minimums (MyLoM)</h3>
+              <h3 className="card-title"><i class="fas fa-tasks"></i>{'     '}Your Lists </h3>
                 <p className="card-text">With supporting text below as a natural lead-in to additional content. 
                 With supporting text below as a natural lead-in to additional content. 
                 With supporting text below as a natural lead-in to additional content. 
@@ -495,24 +402,19 @@ class MylomTestApp extends Component {
 
                 <br />
 
-                <form class="form-inline" onSubmit={this.addMylom}>
+                <form class="form-inline" onSubmit={this.addMylist}>
                   
                   <div className="form-group mx-sm-3 mb-2">
-                      <label form="mylomName" ><h3>New Mylom Name</h3></label>
-                      {/* <input type="text" className="form-control" onChange={this.handleChange} id="mylomName" name="mylom"  /> */}
+                      <label form="mylistName" ><h3>New List Name</h3></label>
                   </div>
                   <div class="form-group mx-sm-3 mb-2">
-                    <input type="text" className="form-control" onChange={this.handleChange} placeholder="Enter or click button" id="mylomName" name="mylom"  />
+                    <input type="text" className="form-control" onChange={this.handleChange} placeholder="Enter or click button" id="mylistName" name="mylist"  />
                   </div>
                   <div class="form-group mx-sm-3 mb-2">
-                    <button className="btn btn-home btn-lg" type="submit" onClick={this.addMylom}><b>New Mylom</b></button>
+                    <button className="btn btn-home btn-lg" type="submit" onClick={this.addMylist}><b>New List</b></button>
                   </div>
                   
                 </form>
-
-                
-
-                
 
                 
                   
@@ -579,185 +481,6 @@ class MylomTestApp extends Component {
 
 
         </div>
-      </div>
-    )
-  }
-
-  renderMylistAccordion () {
-    
-    const MyListItem = this.state.mylists.map((mylist, index) => {
-      var collapseTarget = "collapse" + mylist.id;
-      console.log(collapseTarget);
-
-      return (
-
-        <ContentWrapper>
-        <div class="card-group-lom list-group-item-lom justify-content-between align-items-center" 
-          id="accordion" 
-          role="tablist" 
-          aria-multiselectable="false" 
-          key={index}>
-
-            {/* Begin card header data outer loop */}
-            
-              <div class="card-header-lom">
-                <h6 class="card-title-lom d-flex justify-content-between">
-                
-                  <a data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-check-square"></i>{'     '}{mylist.mylistName}</a>
-                  <div class="btn-group mr-2" role="group" aria-label="item edit group">
-                  
-                    <button className="btn btn-primary btn-sm " data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-plus"></i></button>
-                    <button value={mylist.id} className="btn btn-sm btn-primary disabled " onClick={this.editMylist}><i class="fas fa-edit"></i></button>
-                    <button value={mylist.id} className="btn btn-primary btn-sm " onClick={this.deleteMylist}><i class="fas fa-trash"></i></button>
-                  </div>
-                  
-                </h6>
-                <p align="left"><b>Description:</b> This is data in lists - child of mylom.</p>
-                <br />
-                <div id={collapseTarget} class="collapse">
-                <p align="left"> Additional content here regarding the child list.</p>
-
-                  
-
-                  <ul class="list-group ">
-
-                  {/* <MylomTestListApp /> */}
-
-                  {this.renderMytaskAccordion()}
-                  
-                  
-                  
-                  
-                  </ul>
-                </div>
-                
-              </div>
-
-          {/* End card header data outer loop */}
-        </div>
-        </ContentWrapper>
-        
-      )
-    })
-
-    return (
-      <div className="card text-center">
-        <div className="tab-content">
-            <div className="card-body">
-                <br />
-
-                <form class="form-inline" onSubmit={this.addMylist}>
-                  
-                  <div className="form-group mx-sm-3 mb-2">
-                      <label form="mylistName" ><h3>New Mylist Name</h3></label>
-                      {/* <input type="text" className="form-control" onChange={this.handleChange} id="mylomName" name="mylom"  /> */}
-                  </div>
-                  <div class="form-group mx-sm-3 mb-2">
-                    <input type="text" className="form-control" onChange={this.handleChange} placeholder="Enter or click button" id="mylistName" name="mylist"  />
-                  </div>
-                  <div class="form-group mx-sm-3 mb-2">
-                    <button className="btn btn-home btn-lg" type="submit" onClick={this.addMylist}><b>New Mylist</b></button>
-                  </div>
-                  
-                </form>
-                <br />
-
-                <div class="card-lom panel-default">
-                    {MyListItem}
-                </div>
-            </div> {/* card body */}
-        </div> {/* tab content */}
-
-
-      </div>
-    )
-  }
-
-  renderMytaskAccordion () {
-    
-    const MyTaskItem = this.state.mytasks.map((mytask, index) => {
-      var collapseTarget = "collapse" + mytask.id;
-      console.log(collapseTarget);
-
-      return (
-
-        <ContentWrapper>
-        <div class="card-group-lom list-group-item-lom justify-content-between align-items-center" 
-          id="accordion" 
-          role="tablist" 
-          aria-multiselectable="false" 
-          key={index}>
-
-            {/* Begin card header data outer loop */}
-            
-              <div class="card-header-lom">
-                <h6 class="card-title-lom d-flex justify-content-between">
-                
-                  <a data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-check-square"></i>{'     '}{mytask.mytaskName}</a>
-                  <div class="btn-group mr-2" role="group" aria-label="item edit group">
-                  
-                    <button className="btn btn-primary btn-sm " data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-plus"></i></button>
-                    <button value={mytask.id} className="btn btn-sm btn-primary disabled " onClick={this.editMytask}><i class="fas fa-edit"></i></button>
-                    <button value={mytask.id} className="btn btn-primary btn-sm " onClick={this.deleteMytask}><i class="fas fa-trash"></i></button>
-                  </div>
-                  
-                </h6>
-                <p align="left"><b>Description:</b> This is data in tasks - child of lists.</p>
-                <br />
-                <div id={collapseTarget} class="collapse">
-                <p align="left"> Additional content here regarding the child list.</p>
-
-                  
-
-                  <ul class="list-group ">
-
-                  {/* <MylomTestListApp /> */}
-
-                  {/* {this.renderMytaskList()} */}
-                  
-                  
-                  
-                  
-                  </ul>
-                </div>
-                
-              </div>
-
-          {/* End card header data outer loop */}
-        </div>
-        </ContentWrapper>
-        
-      )
-    })
-
-    return (
-      <div className="card text-center">
-        <div className="tab-content">
-            <div className="card-body">
-                <br />
-
-                <form class="form-inline" onSubmit={this.addMytask}>
-                  
-                  <div className="form-group mx-sm-3 mb-2">
-                      <label form="mytaskName" ><h3>New Mytask Name</h3></label>
-                  </div>
-                  <div class="form-group mx-sm-3 mb-2">
-                    <input type="text" className="form-control" onChange={this.handleChange} placeholder="Enter or click button" id="mytaskName" name="mytask"  />
-                  </div>
-                  <div class="form-group mx-sm-3 mb-2">
-                    <button className="btn btn-home btn-lg" type="submit" onClick={this.addMytask}><b>New Mytask</b></button>
-                  </div>
-                  
-                </form>
-                <br />
-
-                <div class="card-lom panel-default">
-                    {MyTaskItem}
-                </div>
-            </div> {/* card body */}
-        </div> {/* tab content */}
-
-
       </div>
     )
   }
@@ -860,9 +583,23 @@ class MylomTestApp extends Component {
     
     return (
       
-      <div className="MylomTestAppNew">
+      <div className="MylomTestAppNewLists">
+
+        <form class="form-inline" onSubmit={this.addMylist}>
+                    
+          <div className="form-group mx-sm-3 mb-2">
+              <label form="listName" ><h3>New List Name</h3></label>
+          </div>
+          <div class="form-group mx-sm-3 mb-2">
+            <input type="text" className="form-control" onChange={this.handleChange} placeholder="Enter or click button" id="listName" name="mylist"  />
+          </div>
+          <div class="form-group mx-sm-3 mb-2">
+            <button className="btn btn-home btn-lg" type="submit" onClick={this.addMylist}><b>New List</b></button>
+          </div>
+          
+        </form>
         
-        {this.renderMylomAccordion()}
+        {this.renderMylistList()}
         
 
         
@@ -884,4 +621,4 @@ const select = (state) => ({
   ),
 });
 
-export default MylomTestApp;
+export default MylistTestApp;

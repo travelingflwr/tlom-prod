@@ -93,12 +93,12 @@ const LayoutWrapper = styled.div`
   }
   .btn-sm, .btn-group-sm>.btn {
     padding: .5rem 1rem;
-    font-size: .65rem;
-    line-height: 1.5;
+    font-size: .35rem;
+    line-height: 1;
     border-radius: .3rem;
     background-color: #1290DD;
     color: #fff;
-    width: 70px;
+    width: 40px;
     font-weight: 700;
     border: 0;
     border-radius: 35px;
@@ -108,8 +108,9 @@ const LayoutWrapper = styled.div`
 
     &:hover {
       box-shadow: 0 15px 15px rgba(0, 0, 0, 0.16);
-      transform: translate(0, -5px);
+      // transform: translate(0, -5px);
   }
+
   }
   .btn-home {
     /* color: #fff;
