@@ -13,8 +13,8 @@ import SocialButtons from 'view/landing/styles/SocialButtons';
 import { Link } from 'react-router-dom';
 import OtherActions from 'view/landing/styles/OtherActions';
 import authSelectors from 'modules/auth/authSelectors';
-import MylomTestListTable from 'view/mylomtest/list/MylomTestListTable';
-import MylomTestListApp from 'view/mylomtest/newapp/MylomTestAppNewLists';
+// import MylomTestListTable from 'view/mylomtest/list/MylomTestListTable';
+// import MylomTestListApp from 'view/mylomtest/newapp/MylomTestAppNewLists';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faHome, faTrash, faEdit, faPlus, faTasks, faCheckSquare, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -222,8 +222,8 @@ class MylomTestApp extends Component {
       mytaskName: this.state.mytask,
       mytaskDescription: "",
       createdAt:(new Date()).getTime(),
+      dueDate: Date(),
       completed: false,
-      // groupsArray: [{groupName: "Group 1", listArray: [{listName: "List 1", taskArray: [{taskName: "Task 1"}]}]}],
       mytaskOwner: currentUser,
       mytaskOwnerEmail: currentUserEmail,
       myllistId: "",
@@ -345,12 +345,12 @@ class MylomTestApp extends Component {
         <li className="list-group-item-lom d-flex justify-content-between align-items-center" key={index}>
           
           
-          <h5 className="mb-1" >{mylist.mylistName}</h5> {'  '}
+      <h5 className="mb-1" >{mylist.mylistName} - {mylist.mylistId}</h5> {'  '}
           <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group mr-2" role="group" aria-label="item edit group">
-              <button value={mylist.id} className="btn btn-primary btn-sm " onClick={this.deleteMylist}><i class="fas fa-trash"></i></button>
-              <button value={mylist.id} className="btn btn-sm btn-primary disabled " onClick={this.editMylist}><i class="fas fa-edit"></i></button>
-              <button value={mylist.id} className="btn btn-sm btn-primary disabled " onClick={this.viewMylist}><i class="fas fa-plus"></i></button>
+              <button value={mylist.mylistId} className="btn btn-primary btn-sm " onClick={this.deleteMylist}><i class="fas fa-trash"></i></button>
+              <button value={mylist.mylistId} className="btn btn-sm btn-primary disabled " onClick={this.editMylist}><i class="fas fa-edit"></i></button>
+              <button value={mylist.mylistId} className="btn btn-sm btn-primary disabled " onClick={this.viewMylist}><i class="fas fa-plus"></i></button>
             </div>
           </div>
           
@@ -367,32 +367,81 @@ class MylomTestApp extends Component {
   }
 
   renderMytaskList () {
-    const MyTaskItem = this.state.mytaskss.map((mytask, index) => {
+    const MyTaskItem = this.state.mytasks.map((mytask, index) => {
       console.log(mytask)
       return (
         
         
-        <li className="list-group-item-lom d-flex justify-content-between align-items-center" key={index}>
-          
-          
-          <h5 className="mb-1" >{mytask.mytaskName}</h5> {'  '}
-          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-            <div class="btn-group mr-2" role="group" aria-label="item edit group">
-              <button value={mytask.id} className="btn btn-primary btn-sm " onClick={this.deleteMytask}><i class="fas fa-trash"></i></button>
-              <button value={mytask.id} className="btn btn-sm btn-primary disabled " onClick={this.editMytask}><i class="fas fa-edit"></i></button>
-              <button value={mytask.id} className="btn btn-sm btn-primary disabled " onClick={this.viewMytask}><i class="fas fa-plus"></i></button>
+          <div
+              style={{
+                paddingLeft: '4px',
+                paddingRight: '4px',
+                paddingBottom: '4px',
+                
+              }}
+              className="col-md-4 col-lg-4 "
+            >
+            <div className="card d-flex justify-content-between align-items-center bg-light mb-3" key={index} >
+
+
+
+
+              <div class="card-body">
+              
+              <div class="d-flex w-100 justify-content-between">
+                <div class="d-flex w-100 ">
+                  <form>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                    </div>
+                  </form>
+                  <h5 className="card-title" >{mytask.mytaskName}</h5> {'  '}
+                </div>
+                <div class="d-flex w-100 justify-content-between">
+                  <small><span class="badge badge-primary badge-pill">In Progress</span></small>
+                  <small><b>Due:</b> 3 days ago</small>
+                </div>
+
+                
+                
+                
+              </div>
+
+              
+              
+
+              <p class="card-text mb-1" >Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+        <small>Donec id elit non mi porta.</small>
+
+                <div class="btn-toolbar " role="toolbar" aria-label="Toolbar with button groups">
+                  <div class="btn-group mr-2" role="group" aria-label="item edit group">
+                    <button value={mytask.mytaskId} className="btn btn-primary btn-sm " onClick={this.deleteMytask}><i class="fas fa-trash"></i></button>
+                    <button value={mytask.mytaskId} className="btn btn-sm btn-primary disabled " onClick={this.editMytask}><i class="fas fa-edit"></i></button>
+                    <button value={mytask.mytaskId} className="btn btn-sm btn-primary disabled " onClick={this.viewMytask}><i class="fas fa-plus"></i></button>
+                  </div>
+                  
+                </div>
+                
+              
+                </div>
             </div>
           </div>
-          
-        </li>
+        
         
       )
     })
 
     return (
-      <ul className="list-group mt-2">
+      
+      
+        
+
+        <div className="card-group mt-2">
         {MyTaskItem}
-      </ul>
+        </div>
+      
+
+      
     )
   }
 
@@ -586,14 +635,14 @@ class MylomTestApp extends Component {
   renderMylistAccordion () {
     
     const MyListItem = this.state.mylists.map((mylist, index) => {
-      var collapseTarget = "collapse" + mylist.id;
+      var collapseTarget = "collapse" + mylist.mylistId;
       console.log(collapseTarget);
 
       return (
 
         <ContentWrapper>
         <div class="card-group-lom list-group-item-lom justify-content-between align-items-center" 
-          id="accordion" 
+          id="listaccordion" 
           role="tablist" 
           aria-multiselectable="false" 
           key={index}>
@@ -603,12 +652,12 @@ class MylomTestApp extends Component {
               <div class="card-header-lom">
                 <h6 class="card-title-lom d-flex justify-content-between">
                 
-                  <a data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-check-square"></i>{'     '}{mylist.mylistName}</a>
+                  <a data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-check-square"></i>{'     '}{mylist.mylistName} - {mylist.mylistId}</a>
                   <div class="btn-group mr-2" role="group" aria-label="item edit group">
                   
                     <button className="btn btn-primary btn-sm " data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-plus"></i></button>
-                    <button value={mylist.id} className="btn btn-sm btn-primary disabled " onClick={this.editMylist}><i class="fas fa-edit"></i></button>
-                    <button value={mylist.id} className="btn btn-primary btn-sm " onClick={this.deleteMylist}><i class="fas fa-trash"></i></button>
+                    <button value={mylist.mylistId} className="btn btn-sm btn-primary disabled " onClick={this.editMylist}><i class="fas fa-edit"></i></button>
+                    <button value={mylist.mylistId} className="btn btn-primary btn-sm " onClick={this.deleteMylist}><i class="fas fa-trash"></i></button>
                   </div>
                   
                 </h6>
@@ -619,11 +668,32 @@ class MylomTestApp extends Component {
 
                   
 
-                  <ul class="list-group ">
+                  <ul class="list-group list-group-flush ">
 
                   {/* <MylomTestListApp /> */}
 
-                  {this.renderMytaskAccordion()}
+                  <div class="card-header-lom d-flex">
+                  <h2>Tasks</h2>
+                </div>
+                <br />
+
+                
+
+                <form class="form-inline" onSubmit={this.addMytask}>
+                  
+                  <div className="form-group mx-sm-3 mb-2">
+                      <label form="mytaskName" ><h3>New Task Name</h3></label>
+                  </div>
+                  <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" className="form-control" onChange={this.handleChange} placeholder="Enter or click button" id="mytaskName" name="mytask"  />
+                  </div>
+                  <div class="form-group mx-sm-3 mb-2">
+                    <button className="btn btn-home btn-lg" type="submit" onClick={this.addMytask}><b>Add a New Task</b></button>
+                  </div>
+                  
+                </form>
+
+                  {this.renderMytaskList()}
                   
                   
                   
@@ -682,18 +752,20 @@ class MylomTestApp extends Component {
       return (
 
         <ContentWrapper>
-        <div class="card-group-lom list-group-item-lom justify-content-between align-items-center" 
-          id="accordion" 
+        <div class="card-group-lom list-group-item-lom justify-content-between align-items-center list-group-flush" 
+          id="taskaccordion" 
           role="tablist" 
           aria-multiselectable="false" 
           key={index}>
 
             {/* Begin card header data outer loop */}
+
+            
             
               <div class="card-header-lom">
                 <h6 class="card-title-lom d-flex justify-content-between">
                 
-                  <a data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-check-square"></i>{'     '}{mytask.mytaskName}</a>
+                  <a data-toggle="collapse" data-parent="#listaccordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-check-square"></i>{'     '}{mytask.mytaskName}</a>
                   <div class="btn-group mr-2" role="group" aria-label="item edit group">
                   
                     <button className="btn btn-primary btn-sm " data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-plus"></i></button>
@@ -735,17 +807,23 @@ class MylomTestApp extends Component {
         <div className="tab-content">
             <div className="card-body">
                 <br />
+                <div class="card-header-lom d-flex">
+                  <h2>Tasks</h2>
+                </div>
+                <br />
+
+                
 
                 <form class="form-inline" onSubmit={this.addMytask}>
                   
                   <div className="form-group mx-sm-3 mb-2">
-                      <label form="mytaskName" ><h3>New Mytask Name</h3></label>
+                      <label form="mytaskName" ><h3>New Task Name</h3></label>
                   </div>
                   <div class="form-group mx-sm-3 mb-2">
                     <input type="text" className="form-control" onChange={this.handleChange} placeholder="Enter or click button" id="mytaskName" name="mytask"  />
                   </div>
                   <div class="form-group mx-sm-3 mb-2">
-                    <button className="btn btn-home btn-lg" type="submit" onClick={this.addMytask}><b>New Mytask</b></button>
+                    <button className="btn btn-home btn-lg" type="submit" onClick={this.addMytask}><b>Add a New Task</b></button>
                   </div>
                   
                 </form>
