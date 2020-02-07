@@ -310,8 +310,16 @@ class MylomTestApp extends Component {
   renderMylomList () {
     const ListItem = this.state.myloms.map((mylom, index) => {
       return (
+
+        
+            
+          
         
         <li className="list-group-item-lom d-flex justify-content-between align-items-center" key={index}>
+          <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" key={index}>{mylom.mylomName}</a>
+          
+
+          
           
           
           <h5 className="mb-1" >{mylom.mylomName}</h5> {'  '}
@@ -333,6 +341,50 @@ class MylomTestApp extends Component {
       <ul className="list-group mt-2">
         {ListItem}
       </ul>
+    )
+  }
+
+  renderMylomListNew () {
+    const ListItem = this.state.myloms.map((mylom, index) => {
+      var tabIndex = mylom.id;
+      return (
+
+
+        
+        
+        <a class="list-group-item list-group-item-action" id={"list-"+tabIndex+"-list"} data-toggle="list" href={"#list-"+tabIndex} role="tab" aria-controls={tabIndex} key={index}>{mylom.mylomName}</a>
+
+        
+        
+      )
+    })
+
+    return (
+      <div class="list-group" id="list-tab" role="tablist">
+        {ListItem}
+      </div>
+    )
+  }
+
+  renderMylomListContentNew () {
+    const ListItem = this.state.myloms.map((mylom, index) => {
+      var tabIndex = mylom.id;
+      return (
+
+        
+          <div class="tab-pane fade" id={"list-"+tabIndex} role="tabpanel" aria-labelledby={"list-"+tabIndex+"-list"}>
+            {tabIndex+" content"}
+            {this.renderMylistList()}
+          </div>
+        
+        
+      )
+    })
+
+    return (
+      <div class="tab-content" id="nav-tabContent">
+        {ListItem}
+      </div>
     )
   }
 
@@ -454,6 +506,7 @@ class MylomTestApp extends Component {
       return (
 
         <ContentWrapper>
+          
         <div class="card-group-lom list-group-item-lom justify-content-between align-items-center" 
           id="accordion" 
           role="tablist" 
@@ -463,19 +516,35 @@ class MylomTestApp extends Component {
             {/* Begin card header data outer loop */}
             
               <div class="card-header-lom">
-                <h6 class="card-title-lom d-flex justify-content-between">
+              
+              
+                
+              <div class="row">
+                <div class="col-8">
+
+                <h5 class="list-item list-group-item-action ">
+                
+                <div class="d-flex w-100 justify-content-between">
+                  <a data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-check-square"></i>{'     '}{mylom.mylomName}</a>
+                  
+                </div>
+
                 
                   
-                  <a data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-check-square"></i>{'     '}{mylom.mylomName}</a>
-                  <div class="btn-group mr-2" role="group" aria-label="item edit group">
                   
+                  <div class="btn-group mr-2" role="group" aria-label="item edit group">
                     <button className="btn btn-primary btn-sm " data-toggle="collapse" data-parent="#accordion" data-target={"#"+collapseTarget} aria-expanded="true" aria-controls={collapseTarget} ><i class="fas fa-plus"></i></button>
                     <button value={mylom.id} className="btn btn-sm btn-primary disabled " onClick={this.editMylom}><i class="fas fa-edit"></i></button>
                     <button value={mylom.id} className="btn btn-primary btn-sm " onClick={this.deleteMylom}><i class="fas fa-trash"></i></button>
                   </div>
                   
-                </h6>
-                <p align="left"><b>Description:</b> With supporting text below as a natural lead-in to additional content.</p>
+                </h5>
+
+                <small align="left">3 days ago</small>
+                
+
+                
+                
                 {/* <div class="btn-toolbar d-flex justify-content-between align-items-center" role="toolbar" aria-label="Toolbar with button groups"> */}
                 
                   {/* <h3>{'    '}{mylom.mylomName} Lists</h3> */}
@@ -488,12 +557,15 @@ class MylomTestApp extends Component {
                   {/* </div> */}
                   {'    '}
                 {/* </div> */}
+                  </div> {/* End of column list items */}
+
+                
                 <br />
                 <div id={collapseTarget} class="collapse">
                 <p align="left"> Additional content here regarding the child list.</p>
 
                   
-
+                <div class="col-8">
                   <ul class="list-group ">
 
                   {/* <MylomTestListApp /> */}
@@ -504,6 +576,9 @@ class MylomTestApp extends Component {
                   
                   
                   </ul>
+                  </div>
+                  
+                  </div> {/* End of row  */}
                 </div>
                 
               </div>
@@ -544,6 +619,14 @@ class MylomTestApp extends Component {
 
                 <br />
 
+                <div class="card-header-lom d-flex">
+                  <h2>Your Master Lists</h2>
+                </div>
+
+                <div class="card-header-lom d-flex">
+                  <p>Click on a list name to reveal the child elements.</p>
+                </div>
+
                 <form class="form-inline" onSubmit={this.addMylom}>
                   
                   <div className="form-group mx-sm-3 mb-2">
@@ -559,21 +642,22 @@ class MylomTestApp extends Component {
                   
                 </form>
 
+
+
+                <div class="row">
+
                 
+
+              
+            
 
                 
 
                 
-                  
-                  
-                <br />
 
-                
-
-                
-
-                <div class="card-lom panel-default">
-                    {ListItem}
+                  <div class="list-group panel-default">
+                      {ListItem}
+                  </div>
                 </div>
             </div>
           </div>
@@ -628,6 +712,12 @@ class MylomTestApp extends Component {
 
 
         </div>
+
+        
+
+        
+
+        
       </div>
     )
   }
@@ -641,6 +731,8 @@ class MylomTestApp extends Component {
       return (
 
         <ContentWrapper>
+        
+        <div class="col-8">
         <div class="card-group-lom list-group-item-lom justify-content-between align-items-center" 
           id="listaccordion" 
           role="tablist" 
@@ -704,6 +796,7 @@ class MylomTestApp extends Component {
               </div>
 
           {/* End card header data outer loop */}
+        </div>
         </div>
         </ContentWrapper>
         
@@ -942,6 +1035,19 @@ class MylomTestApp extends Component {
         
         {this.renderMylomAccordion()}
         
+        <br /><br /><br /><br />
+        <div class="row">
+          <div class="col-4">
+            
+              {this.renderMylomListNew()}
+            
+          </div>
+          <div class="col-8">
+            
+              {this.renderMylomListContentNew()}
+            
+          </div>
+        </div>
 
         
         
