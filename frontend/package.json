@@ -19,7 +19,7 @@
     "firebase": "5.8.4",
     "formik": "1.5.1",
     "history": "4.7.2",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "lodash": "4.17.11",
     "md5": "2.2.1",
     "nprogress": "0.2.0",
